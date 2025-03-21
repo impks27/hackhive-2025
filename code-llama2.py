@@ -7,15 +7,40 @@ from transformers import pipeline
 # Load zero-shot classification model
 classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
 
-# Request Type Definitions
+# Request Type Definitions (Main & Subcategories)
 request_types = {
-    "Money Movement - Inbound": "Any money coming into the bank, such as customer loan repayments, incoming wire transfers, and deposits.",
-    "Money Movement - Outbound": "Any money going out of the bank, such as loan disbursements, refunds, or wire transfers sent to customers.",
-    "Billing Issue": "Customer inquiries related to incorrect charges, missing payments, or overcharges on accounts.",
-    "Technical Support": "Requests related to system access issues, account login problems, or software glitches.",
-    "Account Management": "Requests for account modifications, user role changes, or updates to customer details.",
-    "General Inquiry": "Any question or request that does not fit into other categories.",
-    "Contract Renewal Request": "Emails related to renewing contracts, updating agreements, or extending financial services."
+    "Money Movement - Inbound": {
+        "description": "Any money coming into the bank, such as customer loan repayments, incoming wire transfers, and deposits.",
+        "subcategories": {
+            "Customer Loan Repayment": "A customer is making a payment towards their loan balance.",
+            "Incoming Wire Transfer": "Funds received via wire transfer from another bank or financial institution.",
+            "Deposit Received": "A deposit made into a customer account or loan payment."
+        }
+    },
+    "Money Movement - Outbound": {
+        "description": "Any money going out of the bank, such as loan disbursements, refunds, or wire transfers sent to customers.",
+        "subcategories": {
+            "Loan Disbursement": "Funds released to a borrower as part of a loan agreement.",
+            "Customer Refund": "A refund issued to a customer due to overpayment or service issue.",
+            "Wire Transfer Sent": "Funds sent to another account via wire transfer."
+        }
+    },
+    "Billing Issue": {
+        "description": "Customer inquiries related to incorrect charges, missing payments, or overcharges on accounts.",
+        "subcategories": {
+            "Incorrect Charge": "A customer disputes a charge on their account.",
+            "Missing Payment": "A customer claims a payment was made but not credited.",
+            "Overcharge": "A customer was charged more than expected."
+        }
+    },
+    "Technical Support": {
+        "description": "Requests related to system access issues, account login problems, or software glitches.",
+        "subcategories": {
+            "Login Issue": "A user cannot log into their banking or loan account.",
+            "System Glitch": "A customer reports an issue with the online banking platform.",
+            "Access Request": "A user requests access to a restricted system or account."
+        }
+    }
 }
 
 # Function to extract text from PDF
@@ -36,18 +61,20 @@ def extract_text_from_eml(eml_path):
         print(f"❌ Error extracting text from {eml_path}: {e}")
         return ""
 
-# Function to classify email content
+# Function to classify email content into main and subcategories
 def classify_email(content):
     if not content.strip():
-        return {"request_type": "NA", "reason": "No meaningful content found.", "confidence": 0.0}
+        return {"request_type": "NA", "sub_request_type": "NA", "reason": "No meaningful content found.", "confidence": 0.0}
 
-    # Construct classification prompt
-    request_type_descriptions = "\n".join([f"- {key}: {value}" for key, value in request_types.items()])
-    classification_prompt = f"""
+    # Prepare main request type classification
+    main_request_types = list(request_types.keys())
+    main_request_descriptions = "\n".join([f"- {key}: {value['description']}" for key, value in request_types.items()])
+
+    main_prompt = f"""
     You are an AI email classifier for a Loan Services bank. Your job is to classify emails into predefined request types based on their content.
 
     Here are the request types and their meanings:
-    {request_type_descriptions}
+    {main_request_descriptions}
 
     Given the following email:
     ---
@@ -58,20 +85,54 @@ def classify_email(content):
     """
 
     try:
-        result = classifier(classification_prompt, list(request_types.keys()))
+        main_result = classifier(main_prompt, main_request_types)
+        top_main_request = main_result["labels"][0]
+        main_confidence = main_result["scores"][0]
+        main_reason = request_types[top_main_request]["description"]
 
-        top_class = result["labels"][0]
-        confidence = result["scores"][0]
-        reason = request_types[top_class]
+        # Prepare subcategory classification if applicable
+        sub_request_types = request_types[top_main_request].get("subcategories", {})
+        if sub_request_types:
+            sub_request_labels = list(sub_request_types.keys())
+            sub_request_descriptions = "\n".join([f"- {key}: {value}" for key, value in sub_request_types.items()])
 
+            sub_prompt = f"""
+            Now that the email has been classified as '{top_main_request}', identify the specific subcategory.
+
+            Here are the subcategories:
+            {sub_request_descriptions}
+
+            Given the email:
+            ---
+            {content}
+            ---
+
+            Classify it into one of the subcategories listed above.
+            """
+
+            sub_result = classifier(sub_prompt, sub_request_labels)
+            top_sub_request = sub_result["labels"][0]
+            sub_confidence = sub_result["scores"][0]
+            sub_reason = sub_request_types[top_sub_request]
+
+            return {
+                "request_type": top_main_request,
+                "sub_request_type": top_sub_request,
+                "reason": sub_reason,
+                "confidence": round(min(main_confidence, sub_confidence), 4)
+            }
+
+        # If no subcategories exist, return only the main request type
         return {
-            "request_type": top_class,
-            "reason": reason,
-            "confidence": round(confidence, 4)  # Round to 4 decimal places
+            "request_type": top_main_request,
+            "sub_request_type": "NA",
+            "reason": main_reason,
+            "confidence": round(main_confidence, 4)
         }
+
     except Exception as e:
         print(f"❌ Error during classification: {e}")
-        return {"request_type": "NA", "reason": "Classification error.", "confidence": 0.0}
+        return {"request_type": "NA", "sub_request_type": "NA", "reason": "Classification error.", "confidence": 0.0}
 
 # Process all emails in a directory
 def process_email_directory(directory):
@@ -101,3 +162,7 @@ with open(output_file, "w") as f:
     json.dump(classification_results, f, indent=2)
 
 print(f"✅ Classification completed! Results saved in {output_file}")
+
+# 🔹 Print classification results
+print("\n📌 Classification Results:\n")
+print(json.dumps(classification_results, indent=2))

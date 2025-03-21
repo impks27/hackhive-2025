@@ -1,86 +1,100 @@
 [
   {
     "file": "money_movement_inbound_loan_payment.pdf",
-    "request_type": "Money Movement - Inbound",
-    "reason": "Any money coming into the bank, such as customer loan repayments, incoming wire transfers, and deposits.",
-    "confidence": 0.3257
+    "request_type": "Money Movement - Outbound",
+    "sub_request_type": "Loan Disbursement",
+    "reason": "Funds released to a borrower as part of a loan agreement.",
+    "confidence": 0.4088
   },
   {
     "file": "contract_renewal_request.pdf",
-    "request_type": "Contract Renewal Request",
-    "reason": "Emails related to renewing contracts, updating agreements, or extending financial services.",
-    "confidence": 0.5719
+    "request_type": "Money Movement - Inbound",
+    "sub_request_type": "Customer Loan Repayment",
+    "reason": "A customer is making a payment towards their loan balance.",
+    "confidence": 0.3661
   },
   {
     "file": "money_movement_outbound_loan_disbursement.pdf",
     "request_type": "Money Movement - Outbound",
-    "reason": "Any money going out of the bank, such as loan disbursements, refunds, or wire transfers sent to customers.",
-    "confidence": 0.3546
+    "sub_request_type": "Loan Disbursement",
+    "reason": "Funds released to a borrower as part of a loan agreement.",
+    "confidence": 0.4657
   },
   {
     "file": "sample_email_2 (2).eml",
     "request_type": "Technical Support",
-    "reason": "Requests related to system access issues, account login problems, or software glitches.",
-    "confidence": 0.3273
+    "sub_request_type": "System Glitch",
+    "reason": "A customer reports an issue with the online banking platform.",
+    "confidence": 0.443
   },
   {
     "file": "sample_emails.pdf",
     "request_type": "Money Movement - Inbound",
-    "reason": "Any money coming into the bank, such as customer loan repayments, incoming wire transfers, and deposits.",
-    "confidence": 0.2035
+    "sub_request_type": "Customer Loan Repayment",
+    "reason": "A customer is making a payment towards their loan balance.",
+    "confidence": 0.296
   },
   {
     "file": "account_management.pdf",
-    "request_type": "Money Movement - Outbound",
-    "reason": "Any money going out of the bank, such as loan disbursements, refunds, or wire transfers sent to customers.",
-    "confidence": 0.1834
+    "request_type": "Money Movement - Inbound",
+    "sub_request_type": "Customer Loan Repayment",
+    "reason": "A customer is making a payment towards their loan balance.",
+    "confidence": 0.3569
   },
   {
     "file": "money_movement_outbound_refund_issued.pdf",
     "request_type": "Money Movement - Outbound",
-    "reason": "Any money going out of the bank, such as loan disbursements, refunds, or wire transfers sent to customers.",
-    "confidence": 0.2393
+    "sub_request_type": "Customer Refund",
+    "reason": "A refund issued to a customer due to overpayment or service issue.",
+    "confidence": 0.4007
   },
   {
     "file": "technical_support.pdf",
     "request_type": "Technical Support",
-    "reason": "Requests related to system access issues, account login problems, or software glitches.",
-    "confidence": 0.2587
+    "sub_request_type": "Login Issue",
+    "reason": "A user cannot log into their banking or loan account.",
+    "confidence": 0.3321
   },
   {
     "file": "sample_email_1.eml",
-    "request_type": "Billing Issue",
-    "reason": "Customer inquiries related to incorrect charges, missing payments, or overcharges on accounts.",
-    "confidence": 0.2645
+    "request_type": "Money Movement - Inbound",
+    "sub_request_type": "Customer Loan Repayment",
+    "reason": "A customer is making a payment towards their loan balance.",
+    "confidence": 0.3634
   },
   {
     "file": "sample_email_2.eml",
     "request_type": "Technical Support",
-    "reason": "Requests related to system access issues, account login problems, or software glitches.",
-    "confidence": 0.3273
+    "sub_request_type": "System Glitch",
+    "reason": "A customer reports an issue with the online banking platform.",
+    "confidence": 0.443
   },
   {
     "file": "sample_email_2 (1).eml",
     "request_type": "Technical Support",
-    "reason": "Requests related to system access issues, account login problems, or software glitches.",
-    "confidence": 0.3273
+    "sub_request_type": "System Glitch",
+    "reason": "A customer reports an issue with the online banking platform.",
+    "confidence": 0.443
   },
   {
     "file": "billing_issue.pdf",
     "request_type": "Billing Issue",
-    "reason": "Customer inquiries related to incorrect charges, missing payments, or overcharges on accounts.",
-    "confidence": 0.3554
+    "sub_request_type": "Incorrect Charge",
+    "reason": "A customer disputes a charge on their account.",
+    "confidence": 0.3145
   },
   {
     "file": "money_movement_inbound_wire_transfer.pdf",
     "request_type": "Money Movement - Inbound",
-    "reason": "Any money coming into the bank, such as customer loan repayments, incoming wire transfers, and deposits.",
-    "confidence": 0.4441
+    "sub_request_type": "Incoming Wire Transfer",
+    "reason": "Funds received via wire transfer from another bank or financial institution.",
+    "confidence": 0.4437
   },
   {
     "file": "general_inquiry.pdf",
-    "request_type": "Money Movement - Outbound",
-    "reason": "Any money going out of the bank, such as loan disbursements, refunds, or wire transfers sent to customers.",
-    "confidence": 0.228
+    "request_type": "Money Movement - Inbound",
+    "sub_request_type": "Customer Loan Repayment",
+    "reason": "A customer is making a payment towards their loan balance.",
+    "confidence": 0.3649
   }
 ]
