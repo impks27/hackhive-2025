@@ -1,5 +1,6 @@
 import os
 import json
+import re
 import pdfplumber
 import mailparser
 from transformers import pipeline
@@ -15,7 +16,8 @@ request_types = {
             "Customer Loan Repayment": "A customer is making a payment towards their loan balance.",
             "Incoming Wire Transfer": "Funds received via wire transfer from another bank or financial institution.",
             "Deposit Received": "A deposit made into a customer account or loan payment."
-        }
+        },
+        "fields": ["deal_name", "amount", "transaction_date"]
     },
     "Money Movement - Outbound": {
         "description": "Any money going out of the bank, such as loan disbursements, refunds, or wire transfers sent to customers.",
@@ -23,7 +25,8 @@ request_types = {
             "Loan Disbursement": "Funds released to a borrower as part of a loan agreement.",
             "Customer Refund": "A refund issued to a customer due to overpayment or service issue.",
             "Wire Transfer Sent": "Funds sent to another account via wire transfer."
-        }
+        },
+        "fields": ["deal_name", "amount", "transaction_date"]
     },
     "Billing Issue": {
         "description": "Customer inquiries related to incorrect charges, missing payments, or overcharges on accounts.",
@@ -31,16 +34,18 @@ request_types = {
             "Incorrect Charge": "A customer disputes a charge on their account.",
             "Missing Payment": "A customer claims a payment was made but not credited.",
             "Overcharge": "A customer was charged more than expected."
-        }
-    },
-    "Technical Support": {
-        "description": "Requests related to system access issues, account login problems, or software glitches.",
-        "subcategories": {
-            "Login Issue": "A user cannot log into their banking or loan account.",
-            "System Glitch": "A customer reports an issue with the online banking platform.",
-            "Access Request": "A user requests access to a restricted system or account."
-        }
+        },
+        "fields": ["invoice_number", "billing_date", "amount"]
     }
+}
+
+# Regex patterns for data extraction
+patterns = {
+    "deal_name": r"Deal Name[:\s]*([\w\s-]+)",
+    "amount": r"Amount[:\s]*\$?([\d,]+\.?\d*)",
+    "transaction_date": r"Transaction Date[:\s]*(\d{2}/\d{2}/\d{4})",
+    "invoice_number": r"Invoice Number[:\s]*(\w+)",
+    "billing_date": r"Billing Date[:\s]*(\d{2}/\d{2}/\d{4})"
 }
 
 # Function to extract text from PDF
@@ -61,12 +66,31 @@ def extract_text_from_eml(eml_path):
         print(f"❌ Error extracting text from {eml_path}: {e}")
         return ""
 
+# Function to extract specific fields based on request type
+def extract_fields(content, request_type):
+    extracted_data = {}
+    fields = request_types.get(request_type, {}).get("fields", [])
+
+    for field in fields:
+        pattern = patterns.get(field)
+        if pattern:
+            match = re.search(pattern, content, re.IGNORECASE)
+            extracted_data[field] = match.group(1) if match else "Not Found"
+
+    return extracted_data
+
 # Function to classify email content into main and subcategories
 def classify_email(content):
     if not content.strip():
-        return {"request_type": "NA", "sub_request_type": "NA", "reason": "No meaningful content found.", "confidence": 0.0}
+        return {
+            "request_type": "NA",
+            "sub_request_type": "NA",
+            "reason": "No meaningful content found.",
+            "confidence": 0.0,
+            "extracted_data": {}
+        }
 
-    # Prepare main request type classification
+    # Classify main request type
     main_request_types = list(request_types.keys())
     main_request_descriptions = "\n".join([f"- {key}: {value['description']}" for key, value in request_types.items()])
 
@@ -90,7 +114,7 @@ def classify_email(content):
         main_confidence = main_result["scores"][0]
         main_reason = request_types[top_main_request]["description"]
 
-        # Prepare subcategory classification if applicable
+        # Classify subcategory if applicable
         sub_request_types = request_types[top_main_request].get("subcategories", {})
         if sub_request_types:
             sub_request_labels = list(sub_request_types.keys())
@@ -115,24 +139,36 @@ def classify_email(content):
             sub_confidence = sub_result["scores"][0]
             sub_reason = sub_request_types[top_sub_request]
 
+            # Extract relevant fields
+            extracted_data = extract_fields(content, top_main_request)
+
             return {
                 "request_type": top_main_request,
                 "sub_request_type": top_sub_request,
                 "reason": sub_reason,
-                "confidence": round(min(main_confidence, sub_confidence), 4)
+                "confidence": round(min(main_confidence, sub_confidence), 4),
+                "extracted_data": extracted_data
             }
 
         # If no subcategories exist, return only the main request type
+        extracted_data = extract_fields(content, top_main_request)
         return {
             "request_type": top_main_request,
             "sub_request_type": "NA",
             "reason": main_reason,
-            "confidence": round(main_confidence, 4)
+            "confidence": round(main_confidence, 4),
+            "extracted_data": extracted_data
         }
 
     except Exception as e:
         print(f"❌ Error during classification: {e}")
-        return {"request_type": "NA", "sub_request_type": "NA", "reason": "Classification error.", "confidence": 0.0}
+        return {
+            "request_type": "NA",
+            "sub_request_type": "NA",
+            "reason": "Classification error.",
+            "confidence": 0.0,
+            "extracted_data": {}
+        }
 
 # Process all emails in a directory
 def process_email_directory(directory):
