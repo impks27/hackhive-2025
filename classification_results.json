@@ -12,11 +12,35 @@
     }
   },
   {
+    "file": "incorrect_charge.pdf",
+    "request_type": "Money Movement - Inbound",
+    "sub_request_type": "Customer Loan Repayment",
+    "reason": "A customer is making a payment towards their loan balance.",
+    "confidence": 0.3852,
+    "extracted_data": {
+      "deal_name": "Not Found",
+      "amount": "Not Found",
+      "transaction_date": "Not Found"
+    }
+  },
+  {
     "file": "contract_renewal_request.pdf",
     "request_type": "Money Movement - Inbound",
     "sub_request_type": "Customer Loan Repayment",
     "reason": "A customer is making a payment towards their loan balance.",
     "confidence": 0.4476,
+    "extracted_data": {
+      "deal_name": "Not Found",
+      "amount": "Not Found",
+      "transaction_date": "Not Found"
+    }
+  },
+  {
+    "file": "missing_payment.pdf",
+    "request_type": "Money Movement - Inbound",
+    "sub_request_type": "Customer Loan Repayment",
+    "reason": "A customer is making a payment towards their loan balance.",
+    "confidence": 0.3768,
     "extracted_data": {
       "deal_name": "Not Found",
       "amount": "Not Found",
@@ -113,6 +137,18 @@
     "sub_request_type": "Customer Loan Repayment",
     "reason": "A customer is making a payment towards their loan balance.",
     "confidence": 0.3807,
+    "extracted_data": {
+      "deal_name": "Not Found",
+      "amount": "Not Found",
+      "transaction_date": "Not Found"
+    }
+  },
+  {
+    "file": "overcharge.pdf",
+    "request_type": "Money Movement - Outbound",
+    "sub_request_type": "Customer Refund",
+    "reason": "A refund issued to a customer due to overpayment or service issue.",
+    "confidence": 0.3783,
     "extracted_data": {
       "deal_name": "Not Found",
       "amount": "Not Found",
