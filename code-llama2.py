@@ -21,40 +21,40 @@ except Exception as e:
 
 # Request Type Definitions (Main & Subcategories)
 REQUEST_TYPES = {
-    # "Adjustment": {
-    #     "description": "Revisions or modifications made to existing financial agreements, obligations, or fee structures.",
+    "Adjustment": {
+        "description": "Revisions or modifications made to existing financial agreements, obligations, or fee structures.",
+        "fields": ["deal_name", "amount", "transaction_date"]
+    },
+    # "AU Transfer": {
+    #     "description": "Fund transfers related to Allocation Units (AU), where a principal amount is moved between different financial structures.",
     #     "fields": ["deal_name", "amount", "transaction_date"]
     # },
-    "AU Transfer": {
-        "description": "Fund transfers related to Allocation Units (AU), where a principal amount is moved between different financial structures.",
-        "fields": ["deal_name", "amount", "transaction_date"]
-    },
-    "Closing Notice": {
-        "description": "Notifications or actions related to terminating or modifying an existing financial agreement.",
-        "subcategories": {
-            "Reallocation Fees": "Charges incurred when reallocating funds, assets, or positions within an agreement.",
-            "Amendment Fees": "Fees applied for modifications or contractual adjustments to the terms of an agreement.",
-            "Reallocation Principal": "An adjustment to the principal amount during a reallocation process."
-        },
-        "fields": ["deal_name", "transaction_date", "amount"]
-    },
-    "Commitment Change": {
-        "description": "Adjustments to the level of committed financial resources or obligations within a loan or credit facility.",
-        "subcategories": {
-            "Decrease": "A reduction in the committed amount or financial obligation.",
-            "Increase": "An increase in the committed amount or financial obligation.",
-            "Cashless Roll": "A transaction where an existing commitment is rolled over without cash settlement."
-        },
-        "fields": ["deal_name", "amount", "transaction_date"]
-    },
-    "Fee Payment": {
-        "description": "Payments related to fees associated with financial agreements or loan services.",
-        "subcategories": {
-            "Ongoing Fee": "Recurring fees charged for continuous services or loan maintenance.",
-            "Letter of Credit Fee": "Fees associated with issuing or amending a letter of credit."
-        },
-        "fields": ["deal_name", "amount", "transaction_date", "account_number"]
-    },
+    # "Closing Notice": {
+    #     "description": "Notifications or actions related to terminating or modifying an existing financial agreement.",
+    #     "subcategories": {
+    #         "Reallocation Fees": "Charges incurred when reallocating funds, assets, or positions within an agreement.",
+    #         "Amendment Fees": "Fees applied for modifications or contractual adjustments to the terms of an agreement.",
+    #         "Reallocation Principal": "An adjustment to the principal amount during a reallocation process."
+    #     },
+    #     "fields": ["deal_name", "transaction_date", "amount"]
+    # },
+    # "Commitment Change": {
+    #     "description": "Adjustments to the level of committed financial resources or obligations within a loan or credit facility.",
+    #     "subcategories": {
+    #         "Decrease": "A reduction in the committed amount or financial obligation.",
+    #         "Increase": "An increase in the committed amount or financial obligation.",
+    #         "Cashless Roll": "A transaction where an existing commitment is rolled over without cash settlement."
+    #     },
+    #     "fields": ["deal_name", "amount", "transaction_date"]
+    # },
+    # "Fee Payment": {
+    #     "description": "Payments related to fees associated with financial agreements or loan services.",
+    #     "subcategories": {
+    #         "Ongoing Fee": "Recurring fees charged for continuous services or loan maintenance.",
+    #         "Letter of Credit Fee": "Fees associated with issuing or amending a letter of credit."
+    #     },
+    #     "fields": ["deal_name", "amount", "transaction_date", "account_number"]
+    # },
     "Money Movement - Inbound": {
         "description": "Transactions involving funds being received by the bank, such as loan repayments or interest payments.",
         "subcategories": {
@@ -64,15 +64,15 @@ REQUEST_TYPES = {
             "Principal + Interest + Fee": "Payment including principal, interest, and fees."
         },
         "fields": ["deal_name", "amount", "transaction_date", "account_number"]
-    },
-    "Money Movement - Outbound": {
-        "description": "Transactions involving funds leaving the bank, such as loan disbursements or transfers.",
-        "subcategories": {
-            "Timebound": "Scheduled or deadline-driven fund transfer.",
-            "Foreign Currency": "Outbound transaction in a different currency."
-        },
-        "fields": ["deal_name", "amount", "transaction_date", "currency"]
     }
+    # "Money Movement - Outbound": {
+    #     "description": "Transactions involving funds leaving the bank, such as loan disbursements or transfers.",
+    #     "subcategories": {
+    #         "Timebound": "Scheduled or deadline-driven fund transfer.",
+    #         "Foreign Currency": "Outbound transaction in a different currency."
+    #     },
+    #     "fields": ["deal_name", "amount", "transaction_date", "currency"]
+    # }
 }
 
 # Regex patterns for data extraction
@@ -150,8 +150,22 @@ def classify_email(content: str) -> List[Dict]:
         print("segment: ", segment)
         main_prompt = f"""
         You are an AI email classifier for a Loan Services bank. Classify this email segment into a request type based on the sender's intent:
-        {main_request_descriptions}
-        Segment:
+        {main_request_descriptions} 
+        Classify the following email into a request type:
+
+        Example 1:
+        Email: "Please process an inbound payment for Project Delta. Amount: $2,000."
+        Classification: Money Movement - Inbound
+
+        Example 2:
+        Email: "We request an amendment to the loan fee structure for Project Alpha."
+        Classification: Fee Payment
+
+        Example 3:
+        Email: "We would like to increase our commitment amount for Deal Beta."
+        Classification: Commitment Change
+
+        Now, classify the following segment:
         ---
         {segment}
         ---
@@ -170,7 +184,19 @@ def classify_email(content: str) -> List[Dict]:
                 sub_prompt = f"""
                 Classify this segment into a subcategory of '{top_main_request}' based on the sender's intent:
                 {sub_request_descriptions}
-                Segment:
+                Example 1:
+                Email: "This payment covers the principal amount of the loan."
+                Classification: Principal
+
+                Example 2:
+                Email: "This is to cover the interest accrued this month."
+                Classification: Interest
+
+                Example 3:
+                Email: "We'd like to adjust the fee structure for Project Delta."
+                Classification: Ongoing Fee              
+                
+                Now, classify the following segment:
                 ---
                 {segment}
                 ---
@@ -260,7 +286,7 @@ def process_email_directory(directory: str) -> List[Dict]:
 # --- Execution ---
 
 if __name__ == "__main__":
-    EMAIL_DIRECTORY = "/Users/paramita.santra/impks/hackhive-2025/emails-new"
+    EMAIL_DIRECTORY = "/Users/paramita.santra/impks/hackhive-2025/emails-accuracy-test"
     OUTPUT_FILE = "classification_results.json"
 
     classification_results = process_email_directory(EMAIL_DIRECTORY)
