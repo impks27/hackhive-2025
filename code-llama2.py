@@ -4,12 +4,21 @@ import re
 import pdfplumber
 import mailparser
 from transformers import pipeline
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 # Load zero-shot classification model
-classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+try:
+    classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+except Exception as e:
+    logger.error(f"Failed to load classifier model: {e}")
+    raise
 
 # Request Type Definitions (Main & Subcategories)
-request_types = {
+REQUEST_TYPES = {
     "Money Movement - Inbound": {
         "description": "Any money coming into the bank, such as customer loan repayments, incoming wire transfers, and deposits.",
         "subcategories": {
@@ -40,7 +49,7 @@ request_types = {
 }
 
 # Regex patterns for data extraction
-patterns = {
+PATTERNS = {
     "deal_name": r"Deal Name[:\s]*([\w\s-]+)",
     "amount": r"Amount[:\s]*\$?([\d,]+\.?\d*)",
     "transaction_date": r"Transaction Date[:\s]*(\d{2}/\d{2}/\d{4})",
@@ -48,40 +57,49 @@ patterns = {
     "billing_date": r"Billing Date[:\s]*(\d{2}/\d{2}/\d{4})"
 }
 
-# Function to extract text from PDF
+# --- Utility Functions ---
+
 def extract_text_from_pdf(pdf_path):
+    """Extract text from a PDF file."""
     try:
         with pdfplumber.open(pdf_path) as pdf:
-            return "\n".join([page.extract_text() for page in pdf.pages if page.extract_text()])
+            text = "\n".join([page.extract_text() for page in pdf.pages if page.extract_text()])
+            logger.info(f"Successfully extracted text from PDF: {pdf_path}")
+            return text
     except Exception as e:
-        print(f"❌ Error extracting text from {pdf_path}: {e}")
+        logger.error(f"Error extracting text from {pdf_path}: {e}")
         return ""
 
-# Function to extract text from .eml emails
 def extract_text_from_eml(eml_path):
+    """Extract text from an .eml email file."""
     try:
         mail = mailparser.parse_from_file(eml_path)
-        return f"Subject: {mail.subject}\n{mail.body}"
+        text = f"Subject: {mail.subject}\n{mail.body}"
+        logger.info(f"Successfully extracted text from EML: {eml_path}")
+        return text
     except Exception as e:
-        print(f"❌ Error extracting text from {eml_path}: {e}")
+        logger.error(f"Error extracting text from {eml_path}: {e}")
         return ""
 
-# Function to extract specific fields based on request type
 def extract_fields(content, request_type):
+    """Extract specific fields from content based on request type using regex."""
     extracted_data = {}
-    fields = request_types.get(request_type, {}).get("fields", [])
+    fields = REQUEST_TYPES.get(request_type, {}).get("fields", [])
 
     for field in fields:
-        pattern = patterns.get(field)
+        pattern = PATTERNS.get(field)
         if pattern:
             match = re.search(pattern, content, re.IGNORECASE)
             extracted_data[field] = match.group(1) if match else "Not Found"
-
+    
     return extracted_data
 
-# Function to classify email content into main and subcategories
+# --- Classification Logic ---
+
 def classify_email(content):
+    """Classify email content into main and subcategories."""
     if not content.strip():
+        logger.warning("Empty content provided for classification.")
         return {
             "request_type": "NA",
             "sub_request_type": "NA",
@@ -90,9 +108,9 @@ def classify_email(content):
             "extracted_data": {}
         }
 
-    # Classify main request type
-    main_request_types = list(request_types.keys())
-    main_request_descriptions = "\n".join([f"- {key}: {value['description']}" for key, value in request_types.items()])
+    # Prepare main request type classification
+    main_request_types = list(REQUEST_TYPES.keys())
+    main_request_descriptions = "\n".join([f"- {key}: {value['description']}" for key, value in REQUEST_TYPES.items()])
 
     main_prompt = f"""
     You are an AI email classifier for a Loan Services bank. Your job is to classify emails into predefined request types based on their content.
@@ -109,13 +127,14 @@ def classify_email(content):
     """
 
     try:
+        # Classify main request type
         main_result = classifier(main_prompt, main_request_types)
         top_main_request = main_result["labels"][0]
         main_confidence = main_result["scores"][0]
-        main_reason = request_types[top_main_request]["description"]
+        main_reason = REQUEST_TYPES[top_main_request]["description"]
 
-        # Classify subcategory if applicable
-        sub_request_types = request_types[top_main_request].get("subcategories", {})
+        # Check for subcategories
+        sub_request_types = REQUEST_TYPES[top_main_request].get("subcategories", {})
         if sub_request_types:
             sub_request_labels = list(sub_request_types.keys())
             sub_request_descriptions = "\n".join([f"- {key}: {value}" for key, value in sub_request_types.items()])
@@ -139,9 +158,10 @@ def classify_email(content):
             sub_confidence = sub_result["scores"][0]
             sub_reason = sub_request_types[top_sub_request]
 
-            # Extract relevant fields
+            # Extract fields for the classified request type
             extracted_data = extract_fields(content, top_main_request)
 
+            logger.info(f"Classified email as {top_main_request} - {top_sub_request} with confidence {min(main_confidence, sub_confidence):.4f}")
             return {
                 "request_type": top_main_request,
                 "sub_request_type": top_sub_request,
@@ -150,8 +170,9 @@ def classify_email(content):
                 "extracted_data": extracted_data
             }
 
-        # If no subcategories exist, return only the main request type
+        # No subcategories case
         extracted_data = extract_fields(content, top_main_request)
+        logger.info(f"Classified email as {top_main_request} with confidence {main_confidence:.4f}")
         return {
             "request_type": top_main_request,
             "sub_request_type": "NA",
@@ -161,7 +182,7 @@ def classify_email(content):
         }
 
     except Exception as e:
-        print(f"❌ Error during classification: {e}")
+        logger.error(f"Error during classification: {e}")
         return {
             "request_type": "NA",
             "sub_request_type": "NA",
@@ -170,8 +191,10 @@ def classify_email(content):
             "extracted_data": {}
         }
 
-# Process all emails in a directory
+# --- Main Processing Logic ---
+
 def process_email_directory(directory):
+    """Process all emails in a directory and classify them."""
     results = []
     for filename in os.listdir(directory):
         file_path = os.path.join(directory, filename)
@@ -180,7 +203,7 @@ def process_email_directory(directory):
         elif filename.lower().endswith(".eml"):
             text = extract_text_from_eml(file_path)
         else:
-            print(f"⚠️ Skipping unsupported file: {filename}")
+            logger.warning(f"Skipping unsupported file: {filename}")
             continue
 
         classification = classify_email(text)
@@ -188,17 +211,24 @@ def process_email_directory(directory):
 
     return results
 
-# 🔹 Update the directory path to where your PDFs and EMLs are stored
-email_directory = "/Users/paramita.santra/impks/hackhive-2025/emails"
-classification_results = process_email_directory(email_directory)
+# --- Execution ---
 
-# Save results as JSON
-output_file = "classification_results.json"
-with open(output_file, "w") as f:
-    json.dump(classification_results, f, indent=2)
+if __name__ == "__main__":
+    # Directory containing email files
+    EMAIL_DIRECTORY = "/Users/paramita.santra/impks/hackhive-2025/emails"
+    
+    # Process emails and get results
+    classification_results = process_email_directory(EMAIL_DIRECTORY)
 
-print(f"✅ Classification completed! Results saved in {output_file}")
+    # Save results to JSON
+    OUTPUT_FILE = "classification_results.json"
+    try:
+        with open(OUTPUT_FILE, "w") as f:
+            json.dump(classification_results, f, indent=2)
+        logger.info(f"Classification completed! Results saved in {OUTPUT_FILE}")
+    except Exception as e:
+        logger.error(f"Failed to save results to {OUTPUT_FILE}: {e}")
 
-# 🔹 Print classification results
-print("\n📌 Classification Results:\n")
-print(json.dumps(classification_results, indent=2))
+    # Print results
+    print("\n📌 Classification Results:\n")
+    print(json.dumps(classification_results, indent=2))
