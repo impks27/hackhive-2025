@@ -236,7 +236,8 @@ def classify_email(content: str) -> List[Dict]:
                 top_sub_request = sub_result["labels"][0]
                 sub_confidence = sub_result["scores"][0]
                 sub_reason = sub_request_types[top_sub_request]
-                confidence = round(0.7 * main_confidence + 0.3 * sub_confidence, 4)
+                #confidence = round(0.7 * main_confidence + 0.3 * sub_confidence, 4)
+                confidence = round(max(main_confidence, sub_confidence), 4)
             else:
                 top_sub_request = "NA"
                 sub_reason = main_reason
@@ -316,7 +317,7 @@ def process_email_directory(directory: str) -> List[Dict]:
 # --- Execution ---
 
 if __name__ == "__main__":
-    EMAIL_DIRECTORY = "/Users/paramita.santra/impks/hackhive-2025/emails-new"
+    EMAIL_DIRECTORY = "/Users/paramita.santra/impks/hackhive-2025/test_pdfs"  #emails-new
     OUTPUT_FILE = "classification_results.json"
 
     classification_results = process_email_directory(EMAIL_DIRECTORY)

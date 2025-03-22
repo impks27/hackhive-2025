@@ -1,26 +1,6 @@
 [
   {
-    "file": "Money_Movement_-_Outbound_Foreign_Currency.pdf",
-    "classifications": [
-      {
-        "request_type": "Money Movement - Outbound",
-        "sub_request_type": "Timebound",
-        "reason": {
-          "description": "This is when money has to be sent out by a specific time or date. Think of it like a deadline\u2014maybe a payment is due, or funds need to reach someone by a set day. It\u2019s planned and time-sensitive."
-        },
-        "confidence": 0.4733,
-        "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025",
-          "currency": "Tra"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "Commitment_Change_Decrease.pdf",
+    "file": "Decrease.pdf",
     "classifications": [
       {
         "request_type": "Commitment Change",
@@ -28,18 +8,18 @@
         "reason": {
           "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
         },
-        "confidence": 0.4896,
+        "confidence": 0.7975,
         "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025"
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
         },
         "is_primary": true
       }
     ]
   },
   {
-    "file": "Commitment_Change_Increase.pdf",
+    "file": "Cashless_Roll.pdf",
     "classifications": [
       {
         "request_type": "Commitment Change",
@@ -47,96 +27,18 @@
         "reason": {
           "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
         },
-        "confidence": 0.4344,
+        "confidence": 0.6054,
         "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025"
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
         },
         "is_primary": true
       }
     ]
   },
   {
-    "file": "Closing_Notice_Reallocation_Principal.pdf",
-    "classifications": [
-      {
-        "request_type": "Closing Notice",
-        "sub_request_type": "Reallocation Fees",
-        "reason": {
-          "description": "This is extra money we charge when we move funds or assets around inside a deal. Think of it as a fee for shuffling things to new spots."
-        },
-        "confidence": 0.4093,
-        "extracted_data": {
-          "deal_name": "Project Alpha\nTransaction Date",
-          "transaction_date": "03/15/2025",
-          "amount": "1,250,000"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "Adjustment_General.pdf",
-    "classifications": [
-      {
-        "request_type": "Commitment Change",
-        "sub_request_type": "Decrease",
-        "reason": {
-          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
-        },
-        "confidence": 0.3878,
-        "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "Fee_Payment_Letter_of_Credit_Fee.pdf",
-    "classifications": [
-      {
-        "request_type": "Fee Payment",
-        "sub_request_type": "Ongoing Fee",
-        "reason": {
-          "description": "This is a regular charge we keep taking for ongoing services, like maintaining a loan. It\u2019s like a monthly bill for keeping everything in order."
-        },
-        "confidence": 0.3615,
-        "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025",
-          "account_number": "1234567890"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "Money_Movement_-_Outbound_Timebound.pdf",
-    "classifications": [
-      {
-        "request_type": "Money Movement - Outbound",
-        "sub_request_type": "Timebound",
-        "reason": {
-          "description": "This is when money has to be sent out by a specific time or date. Think of it like a deadline\u2014maybe a payment is due, or funds need to reach someone by a set day. It\u2019s planned and time-sensitive."
-        },
-        "confidence": 0.4652,
-        "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025",
-          "currency": "USD"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "Money_Movement_-_Inbound_Principal.pdf",
+    "file": "Principal.pdf",
     "classifications": [
       {
         "request_type": "Money Movement - Inbound",
@@ -144,19 +46,19 @@
         "reason": {
           "description": "This is when someone pays back both the main amount and the extra cost together. It\u2019s a combo payment."
         },
-        "confidence": 0.3147,
+        "confidence": 0.3776,
         "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025",
-          "account_number": "1234567890"
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found",
+          "account_number": "Not Found"
         },
         "is_primary": true
       }
     ]
   },
   {
-    "file": "Closing_Notice_Reallocation_Fees.pdf",
+    "file": "Foreign_Currency.pdf",
     "classifications": [
       {
         "request_type": "Closing Notice",
@@ -164,73 +66,188 @@
         "reason": {
           "description": "This is extra money we charge when we move funds or assets around inside a deal. Think of it as a fee for shuffling things to new spots."
         },
-        "confidence": 0.3837,
+        "confidence": 0.4927,
         "extracted_data": {
-          "deal_name": "Project Alpha\nTransaction Date",
-          "transaction_date": "03/15/2025",
-          "amount": "1,250,000"
+          "deal_name": "Not Found",
+          "transaction_date": "Not Found",
+          "amount": "Not Found"
         },
         "is_primary": true
       }
     ]
   },
   {
-    "file": "Closing_Notice_Reallocation_Fees (1).pdf",
-    "classifications": [
-      {
-        "request_type": "Closing Notice",
-        "sub_request_type": "Reallocation Fees",
-        "reason": {
-          "description": "This is extra money we charge when we move funds or assets around inside a deal. Think of it as a fee for shuffling things to new spots."
-        },
-        "confidence": 0.3837,
-        "extracted_data": {
-          "deal_name": "Project Alpha\nTransaction Date",
-          "transaction_date": "03/15/2025",
-          "amount": "1,250,000"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "Commitment_Change_Cashless_Roll.pdf",
+    "file": "Increase.pdf",
     "classifications": [
       {
         "request_type": "Commitment Change",
-        "sub_request_type": "Cashless Roll",
+        "sub_request_type": "Decrease",
         "reason": {
-          "description": "This is when we keep the promise going without adding new money. It\u2019s like renewing the deal as-is, no cash needed."
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
         },
-        "confidence": 0.3817,
+        "confidence": 0.6799,
         "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025"
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
         },
         "is_primary": true
       }
     ]
   },
   {
-    "file": "AU_Transfer_General.pdf",
+    "file": "Timebound.pdf",
+    "classifications": [
+      {
+        "request_type": "Money Movement - Outbound",
+        "sub_request_type": "Timebound",
+        "reason": {
+          "description": "This is when money has to be sent out by a specific time or date. Think of it like a deadline\u2014maybe a payment is due, or funds need to reach someone by a set day. It\u2019s planned and time-sensitive."
+        },
+        "confidence": 0.7833,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found",
+          "currency": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Ongoing_Fee.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.6493,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Interest.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.6585,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Reallocation_Fees.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.5737,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Principal_+_Interest_+_Fee.pdf",
+    "classifications": [
+      {
+        "request_type": "Closing Notice",
+        "sub_request_type": "Reallocation Fees",
+        "reason": {
+          "description": "This is extra money we charge when we move funds or assets around inside a deal. Think of it as a fee for shuffling things to new spots."
+        },
+        "confidence": 0.5143,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "transaction_date": "Not Found",
+          "amount": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Letter_of_Credit_Fee.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.6498,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Amendment_Fees.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.6651,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Principal_+_Interest.pdf",
     "classifications": [
       {
         "request_type": "AU Transfer",
         "sub_request_type": "NA",
         "reason": "This is about moving money between different parts of a financial setup, called Allocation Units (AU). It\u2019s like shifting a chunk of cash from one bucket to another in the same system, usually the main amount someone borrowed.",
-        "confidence": 0.2445,
+        "confidence": 0.1983,
         "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025"
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
         },
         "is_primary": true
       }
     ]
   },
   {
-    "file": "multi-req.pdf",
+    "file": "Reallocation_Principal.pdf",
     "classifications": [
       {
         "request_type": "Commitment Change",
@@ -238,159 +255,11 @@
         "reason": {
           "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
         },
-        "confidence": 0.3399,
+        "confidence": 0.5797,
         "extracted_data": {
-          "deal_name": "Project Beta",
-          "amount": "300.",
-          "transaction_date": "03/25/2025"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "Closing_Notice_Amendment_Fees.pdf",
-    "classifications": [
-      {
-        "request_type": "Closing Notice",
-        "sub_request_type": "Reallocation Fees",
-        "reason": {
-          "description": "This is extra money we charge when we move funds or assets around inside a deal. Think of it as a fee for shuffling things to new spots."
-        },
-        "confidence": 0.3876,
-        "extracted_data": {
-          "deal_name": "Project Alpha\nTransaction Date",
-          "transaction_date": "03/15/2025",
-          "amount": "1,250,000"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "Money_Movement_-_Inbound_Principal_+_Interest.pdf",
-    "classifications": [
-      {
-        "request_type": "Money Movement - Inbound",
-        "sub_request_type": "Principal + Interest + Fee",
-        "reason": {
-          "description": "This is when someone sends money that covers everything\u2014the main amount, the extra cost, and any fees. It\u2019s like paying the full bill at once."
-        },
-        "confidence": 0.3451,
-        "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025",
-          "account_number": "1234567890"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "Money_Movement_-_Inbound_Principal_+_Interest_+_Fee.pdf",
-    "classifications": [
-      {
-        "request_type": "Money Movement - Inbound",
-        "sub_request_type": "Principal + Interest + Fee",
-        "reason": {
-          "description": "This is when someone sends money that covers everything\u2014the main amount, the extra cost, and any fees. It\u2019s like paying the full bill at once."
-        },
-        "confidence": 0.3483,
-        "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025",
-          "account_number": "1234567890"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "multi-req-2.pdf",
-    "classifications": [
-      {
-        "request_type": "Money Movement - Inbound",
-        "sub_request_type": "Principal + Interest",
-        "reason": {
-          "description": "This is when someone pays back both the main amount and the extra cost together. It\u2019s a combo payment."
-        },
-        "confidence": 0.2822,
-        "extracted_data": {
-          "deal_name": "Project Delta",
-          "amount": "2,000.",
-          "transaction_date": "03/24/2025",
-          "account_number": "ACC98765"
-        },
-        "is_primary": false
-      },
-      {
-        "request_type": "Money Movement - Inbound",
-        "sub_request_type": "Principal + Interest + Fee",
-        "reason": {
-          "description": "This is when someone sends money that covers everything\u2014the main amount, the extra cost, and any fees. It\u2019s like paying the full bill at once."
-        },
-        "confidence": 0.3204,
-        "extracted_data": {
-          "deal_name": "Project Delta",
-          "amount": "500.",
-          "transaction_date": "03/25/2025",
-          "account_number": "ACC98765"
-        },
-        "is_primary": false
-      },
-      {
-        "request_type": "Commitment Change",
-        "sub_request_type": "Decrease",
-        "reason": {
-          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
-        },
-        "confidence": 0.4032,
-        "extracted_data": {
-          "deal_name": "Project Delta",
-          "amount": "100.",
-          "transaction_date": "03/26/2025"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "Fee_Payment_Ongoing_Fee.pdf",
-    "classifications": [
-      {
-        "request_type": "Fee Payment",
-        "sub_request_type": "Ongoing Fee",
-        "reason": {
-          "description": "This is a regular charge we keep taking for ongoing services, like maintaining a loan. It\u2019s like a monthly bill for keeping everything in order."
-        },
-        "confidence": 0.4127,
-        "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025",
-          "account_number": "1234567890"
-        },
-        "is_primary": true
-      }
-    ]
-  },
-  {
-    "file": "Money_Movement_-_Inbound_Interest.pdf",
-    "classifications": [
-      {
-        "request_type": "Money Movement - Inbound",
-        "sub_request_type": "Principal + Interest + Fee",
-        "reason": {
-          "description": "This is when someone sends money that covers everything\u2014the main amount, the extra cost, and any fees. It\u2019s like paying the full bill at once."
-        },
-        "confidence": 0.3267,
-        "extracted_data": {
-          "deal_name": "Project Alpha\nAmount",
-          "amount": "1,250,000",
-          "transaction_date": "03/15/2025",
-          "account_number": "1234567890"
+          "deal_name": "Not Found",
+          "amount": "10,000",
+          "transaction_date": "Not Found"
         },
         "is_primary": true
       }
