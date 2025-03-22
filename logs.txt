@@ -1,3 +1,175 @@
+segment:  Money Movement - Outbound Request - Foreign Currency
+Transactions involving funds leaving the bank. This falls under the subcategory 'Foreign Currency':
+An outbound transaction in a currency different from the base account currency.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+Currency: USD
+segment:  Commitment Change Request - Decrease
+Adjustments to the level of committed financial resources or obligations. This falls under the
+subcategory 'Decrease': A reduction in the committed amount.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+segment:  Commitment Change Request - Increase
+Adjustments to the level of committed financial resources or obligations. This falls under the
+subcategory 'Increase': An increase in the committed amount.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+segment:  Closing Notice Request - Reallocation Principal
+Notifications or actions related to terminating or modifying an existing financial agreement. This falls
+under the subcategory 'Reallocation Principal': An adjustment to the principal amount during a
+reallocation process.
+Extractable Fields:
+Deal Name: Project Alpha
+Transaction Date: 03/15/2025
+Amount: $1,250,000
+segment:  Adjustment Request
+Revisions or modifications made to existing financial agreements, obligations, or fee structures.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+segment:  Fee Payment Request - Letter of Credit Fee
+Payments related to fees associated with financial agreements. This falls under the subcategory
+'Letter of Credit Fee': Fees for issuing or maintaining a letter of credit.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+Account Number: 1234567890
+segment:  Money Movement - Outbound Request - Timebound
+Transactions involving funds leaving the bank. This falls under the subcategory 'Timebound': A
+scheduled fund transfer that must be completed within a specific timeframe.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+Currency: USD
+segment:  Money Movement - Inbound Request - Principal
+Transactions involving funds being received by the bank. This falls under the subcategory 'Principal':
+Payment covering only the principal amount owed.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+Account Number: 1234567890
+segment:  Closing Notice Request - Reallocation Fees
+Notifications or actions related to terminating or modifying an existing financial agreement. This falls
+under the subcategory 'Reallocation Fees': Charges incurred when reallocating funds within an
+agreement.
+Extractable Fields:
+Deal Name: Project Alpha
+Transaction Date: 03/15/2025
+Amount: $1,250,000
+segment:  Closing Notice Request - Reallocation Fees
+Notifications or actions related to terminating or modifying an existing financial agreement. This falls
+under the subcategory 'Reallocation Fees': Charges incurred when reallocating funds within an
+agreement.
+Extractable Fields:
+Deal Name: Project Alpha
+Transaction Date: 03/15/2025
+Amount: $1,250,000
+segment:  Commitment Change Request - Cashless Roll
+Adjustments to the level of committed financial resources or obligations. This falls under the
+subcategory 'Cashless Roll': A transaction where an existing commitment is rolled over without new
+cash settlement.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+segment:  AU Transfer Request
+Fund transfers related to Allocation Units (AU), where a principal amount is moved between financial
+structures.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+segment:  From: john.doe@example.com
+To: loanservices@bank.com
+Subject: Multiple Requests for Project Beta
+Date: Sat, 22 Mar 2025 04:00:00 -0700
+MIME-Version: 1.0
+Content-Type: text/plain; charset="UTF-8"
+Dear Loan Services Team,
+Please process a fee payment for Deal Name: Project Beta. Amount: $300. Transaction Date:
+03/25/2025. This is an ongoing administrative fee.
+segment:  we need to increase our commitment for the same deal. The new Amount: $10,000
+should be added to the existing facility. Transaction Date: 03/26/2025.
+Thank you,
+John Doe
+segment:  Closing Notice Request - Amendment Fees
+Notifications or actions related to terminating or modifying an existing financial agreement. This falls
+under the subcategory 'Amendment Fees': Fees applied for modifications to the terms of an
+agreement.
+Extractable Fields:
+Deal Name: Project Alpha
+Transaction Date: 03/15/2025
+Amount: $1,250,000
+segment:  Money Movement - Inbound Request - Principal + Interest
+Transactions involving funds being received by the bank. This falls under the subcategory 'Principal
++ Interest': Combined payment of both principal and interest.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+Account Number: 1234567890
+segment:  Money Movement - Inbound Request - Principal + Interest + Fee
+Transactions involving funds being received by the bank. This falls under the subcategory 'Principal
++ Interest + Fee': Comprehensive payment including all components.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+Account Number: 1234567890
+
+segment:  Loan Services Request
+Date: March 22, 2025
+To: Loan Services Team
+Subject: Multiple Inbound Payment Requests for Project Delta
+Dear Team,
+Please process an inbound payment for Deal Name: Project Delta.
+Amount: $2,000.
+Transaction Date: 03/24/2025.
+Account Number: ACC98765.
+This payment covers the principal amount of the loan.
+
+segment:  we have another inbound payment for the same deal.
+Amount: $500.
+Transaction Date: 03/25/2025.
+Account Number: ACC98765.
+This is to cover the interest accrued this month.
+
+segment:  we’d like to adjust the fee structure for Project Delta.
+Amount: $100.
+Transaction Date: 03/26/2025.
+This adjustment is due to a recent amendment in terms.
+Best regards,
+Alex Carter
+
+segment:  Fee Payment Request - Ongoing Fee
+Payments related to fees associated with financial agreements. This falls under the subcategory
+'Ongoing Fee': Recurring fees for continuous services.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+Account Number: 1234567890
+segment:  Money Movement - Inbound Request - Interest
+Transactions involving funds being received by the bank. This falls under the subcategory 'Interest':
+Payment covering only the interest accrued.
+Extractable Fields:
+Deal Name: Project Alpha
+Amount: $1,250,000
+Transaction Date: 03/15/2025
+Account Number: 1234567890
+
+📌 Classification Results:
+
 [
   {
     "file": "Money_Movement_-_Outbound_Foreign_Currency.pdf",

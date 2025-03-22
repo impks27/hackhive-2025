@@ -2,3 +2,4 @@ Llama-2-7B-Chat-GGML/
 .DS_Store
 __pycache__/
 ssh-key/
+offload_weights/
