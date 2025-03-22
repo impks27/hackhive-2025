@@ -1,218 +1,206 @@
 [
   {
-    "file": "money_movement_inbound_loan_payment.pdf",
+    "file": "Money_Movement_-_Outbound_Foreign_Currency.pdf",
     "request_type": "Money Movement - Outbound",
-    "sub_request_type": "Loan Disbursement",
-    "reason": "Funds released to a borrower as part of a loan agreement.",
-    "confidence": 0.4604,
+    "sub_request_type": "Foreign Currency",
+    "reason": "An outbound transaction where funds are sent in a currency different from the base account currency, requiring exchange rate conversions and potentially additional processing fees.",
+    "confidence": 0.4576,
     "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
-    }
-  },
-  {
-    "file": "incorrect_charge.pdf",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.3852,
-    "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
-    }
-  },
-  {
-    "file": "contract_renewal_request.pdf",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.4476,
-    "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
-    }
-  },
-  {
-    "file": "missing_payment.pdf",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.3768,
-    "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
-    }
-  },
-  {
-    "file": "money_movement_outbound_loan_disbursement.pdf",
-    "request_type": "Money Movement - Outbound",
-    "sub_request_type": "Loan Disbursement",
-    "reason": "Funds released to a borrower as part of a loan agreement.",
-    "confidence": 0.5319,
-    "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
-    }
-  },
-  {
-    "file": "sample_email_2 (2).eml",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.4554,
-    "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
-    }
-  },
-  {
-    "file": "sample_emails.pdf",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.4556,
-    "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
-    }
-  },
-  {
-    "file": "account_management.pdf",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.466,
-    "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
-    }
-  },
-  {
-    "file": "money_movement_outbound_refund_issued.pdf",
-    "request_type": "Money Movement - Outbound",
-    "sub_request_type": "Customer Refund",
-    "reason": "A refund issued to a customer due to overpayment or service issue.",
-    "confidence": 0.4906,
-    "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "2,500.00",
-      "transaction_date": "Not Found"
-    }
-  },
-  {
-    "file": "technical_support.pdf",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.4477,
-    "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
-    }
-  },
-  {
-    "file": "money_movement_inbound.pdf",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.4503,
-    "extracted_data": {
-      "deal_name": "Alpha Loan Agreement\nAmount",
-      "amount": "25,000.00",
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
       "transaction_date": "03/15/2025"
     }
   },
   {
-    "file": "sample_email_1.eml",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.3807,
+    "file": "Commitment_Change_Decrease.pdf",
+    "request_type": "Commitment Change",
+    "sub_request_type": "Decrease",
+    "reason": "A reduction in the committed amount or financial obligation, often due to partial repayments, reduced funding needs, facility downsizing, or contractual amendments.",
+    "confidence": 0.4054,
     "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
     }
   },
   {
-    "file": "overcharge.pdf",
+    "file": "Commitment_Change_Increase.pdf",
+    "request_type": "Commitment Change",
+    "sub_request_type": "Decrease",
+    "reason": "A reduction in the committed amount or financial obligation, often due to partial repayments, reduced funding needs, facility downsizing, or contractual amendments.",
+    "confidence": 0.4227,
+    "extracted_data": {
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
+    }
+  },
+  {
+    "file": "Closing_Notice_Reallocation_Principal.pdf",
+    "request_type": "Closing Notice",
+    "sub_request_type": "Reallocation Principal",
+    "reason": "An adjustment to the principal amount during a reallocation process, often related to debt restructuring or capital reallocation within a financial agreement.",
+    "confidence": 0.4584,
+    "extracted_data": {
+      "deal_name": "Project Alpha\nTransaction Date",
+      "transaction_date": "03/15/2025",
+      "amount": "1,250,000"
+    }
+  },
+  {
+    "file": "Adjustment_General.pdf",
+    "request_type": "Adjustment",
+    "sub_request_type": "NA",
+    "reason": "Revisions or modifications made to existing financial agreements, obligations, or fee structures. Adjustments may involve correcting transaction details, restructuring financial terms, or redistributing funds within a deal. These changes are typically driven by contractual amendments, compliance requirements, or business needs.",
+    "confidence": 0.3543,
+    "extracted_data": {
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
+    }
+  },
+  {
+    "file": "Fee_Payment_Letter_of_Credit_Fee.pdf",
+    "request_type": "Fee Payment",
+    "sub_request_type": "Letter of Credit Fee",
+    "reason": "Fees associated with issuing, maintaining, or amending a letter of credit, typically charged to facilitate trade or financial transactions.",
+    "confidence": 0.3474,
+    "extracted_data": {
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
+    }
+  },
+  {
+    "file": "Money_Movement_-_Outbound_Timebound.pdf",
     "request_type": "Money Movement - Outbound",
-    "sub_request_type": "Customer Refund",
-    "reason": "A refund issued to a customer due to overpayment or service issue.",
-    "confidence": 0.3783,
+    "sub_request_type": "Foreign Currency",
+    "reason": "An outbound transaction where funds are sent in a currency different from the base account currency, requiring exchange rate conversions and potentially additional processing fees.",
+    "confidence": 0.48,
     "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
     }
   },
   {
-    "file": "sample_email_2.eml",
+    "file": "Money_Movement_-_Inbound_Principal.pdf",
     "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.4554,
+    "sub_request_type": "Principal",
+    "reason": "A payment that solely covers the repayment of the original loan amount without any interest or additional charges.",
+    "confidence": 0.3354,
     "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
     }
   },
   {
-    "file": "sample_email_2 (1).eml",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.4554,
+    "file": "Closing_Notice_Reallocation_Fees.pdf",
+    "request_type": "Closing Notice",
+    "sub_request_type": "Reallocation Fees",
+    "reason": "Charges incurred when reallocating funds, assets, or positions within an agreement, typically due to structural changes in the deal.",
+    "confidence": 0.4376,
     "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
+      "deal_name": "Project Alpha\nTransaction Date",
+      "transaction_date": "03/15/2025",
+      "amount": "1,250,000"
     }
   },
   {
-    "file": "billing_issue.pdf",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.3475,
+    "file": "Closing_Notice_Reallocation_Fees (1).pdf",
+    "request_type": "Closing Notice",
+    "sub_request_type": "Reallocation Fees",
+    "reason": "Charges incurred when reallocating funds, assets, or positions within an agreement, typically due to structural changes in the deal.",
+    "confidence": 0.4376,
     "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
+      "deal_name": "Project Alpha\nTransaction Date",
+      "transaction_date": "03/15/2025",
+      "amount": "1,250,000"
     }
   },
   {
-    "file": "money_movement_inbound_wire_transfer.pdf",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Incoming Wire Transfer",
-    "reason": "Funds received via wire transfer from another bank or financial institution.",
-    "confidence": 0.499,
+    "file": "Commitment_Change_Cashless_Roll.pdf",
+    "request_type": "Commitment Change",
+    "sub_request_type": "Cashless Roll",
+    "reason": "A transaction where an existing commitment is rolled over or extended without requiring a new cash settlement, often used to restructure obligations or maintain continuity in funding.",
+    "confidence": 0.4236,
     "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "150,000.00",
-      "transaction_date": "Not Found"
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
     }
   },
   {
-    "file": "general_inquiry.pdf",
-    "request_type": "Money Movement - Inbound",
-    "sub_request_type": "Customer Loan Repayment",
-    "reason": "A customer is making a payment towards their loan balance.",
-    "confidence": 0.4447,
+    "file": "AU_Transfer_General.pdf",
+    "request_type": "AU Transfer",
+    "sub_request_type": "NA",
+    "reason": "Fund transfers related to Allocation Units (AU), where a principal amount is moved between different financial structures, accounts, or investment allocations. AU transfers typically occur in structured finance agreements and may involve capital reallocation without changing the total committed amount.",
+    "confidence": 0.3507,
     "extracted_data": {
-      "deal_name": "Not Found",
-      "amount": "Not Found",
-      "transaction_date": "Not Found"
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
+    }
+  },
+  {
+    "file": "Closing_Notice_Amendment_Fees.pdf",
+    "request_type": "Closing Notice",
+    "sub_request_type": "Amendment Fees",
+    "reason": "Fees applied for modifications or contractual adjustments to the terms of an agreement, including extensions, rate changes, or restructuring.",
+    "confidence": 0.4406,
+    "extracted_data": {
+      "deal_name": "Project Alpha\nTransaction Date",
+      "transaction_date": "03/15/2025",
+      "amount": "1,250,000"
+    }
+  },
+  {
+    "file": "Money_Movement_-_Inbound_Principal_+_Interest.pdf",
+    "request_type": "Money Movement - Inbound",
+    "sub_request_type": "Principal + Interest",
+    "reason": "A combined payment that includes both the repayment of the original loan amount and the interest accrued on it.",
+    "confidence": 0.3987,
+    "extracted_data": {
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
+    }
+  },
+  {
+    "file": "Money_Movement_-_Inbound_Principal_+_Interest_+_Fee.pdf",
+    "request_type": "Money Movement - Inbound",
+    "sub_request_type": "Principal + Interest + Fee",
+    "reason": "A comprehensive payment that includes the principal repayment, interest charges, and any associated service or processing fees.",
+    "confidence": 0.3718,
+    "extracted_data": {
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
+    }
+  },
+  {
+    "file": "Fee_Payment_Ongoing_Fee.pdf",
+    "request_type": "Fee Payment",
+    "sub_request_type": "Ongoing Fee",
+    "reason": "Recurring fees charged for continuous services, loan maintenance, or administrative costs.",
+    "confidence": 0.3307,
+    "extracted_data": {
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
+    }
+  },
+  {
+    "file": "Money_Movement_-_Inbound_Interest.pdf",
+    "request_type": "Money Movement - Inbound",
+    "sub_request_type": "Principal + Interest",
+    "reason": "A combined payment that includes both the repayment of the original loan amount and the interest accrued on it.",
+    "confidence": 0.3114,
+    "extracted_data": {
+      "deal_name": "Project Alpha\nAmount",
+      "amount": "1,250,000",
+      "transaction_date": "03/15/2025"
     }
   }
 ]

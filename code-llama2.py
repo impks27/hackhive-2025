@@ -19,33 +19,61 @@ except Exception as e:
 
 # Request Type Definitions (Main & Subcategories)
 REQUEST_TYPES = {
+    "Adjustment": {
+    "description": "Revisions or modifications made to existing financial agreements, obligations, or fee structures. Adjustments may involve correcting transaction details, restructuring financial terms, or redistributing funds within a deal. These changes are typically driven by contractual amendments, compliance requirements, or business needs.",
+    "fields": ["deal_name", "amount", "transaction_date"]
+},
+"AU Transfer": {
+    "description": "Fund transfers related to Allocation Units (AU), where a principal amount is moved between different financial structures, accounts, or investment allocations. AU transfers typically occur in structured finance agreements and may involve capital reallocation without changing the total committed amount.",
+    "fields": ["deal_name", "amount", "transaction_date"]
+}
+,
+    "Closing Notice": {
+    "description": "Notifications or actions related to terminating or modifying an existing financial agreement, loan position, or investment structure. This may involve the reallocation of funds, changes to principal amounts, or associated fees. Closing notices typically indicate the finalization or adjustment of financial obligations within a deal.",
+    "subcategories": {
+        "Reallocation Fees": "Charges incurred when reallocating funds, assets, or positions within an agreement, typically due to structural changes in the deal.",
+        "Amendment Fees": "Fees applied for modifications or contractual adjustments to the terms of an agreement, including extensions, rate changes, or restructuring.",
+        "Reallocation Principal": "An adjustment to the principal amount during a reallocation process, often related to debt restructuring or capital reallocation within a financial agreement."
+    },
+    "fields": ["deal_name", "transaction_date", "amount"]
+},
+    "Commitment Change": {
+    "description": "Adjustments to the level of committed financial resources or obligations within a loan, credit facility, or investment agreement. These changes may result from amendments, restructurings, or re-evaluations of funding needs and can impact borrowing capacity, liquidity, or financial commitments. Commitment changes can involve increases, decreases, or the rolling over of existing positions without additional cash settlement.",
+    "subcategories": {
+        "Decrease": "A reduction in the committed amount or financial obligation, often due to partial repayments, reduced funding needs, facility downsizing, or contractual amendments.",
+        "Increase": "An increase in the committed amount or financial obligation, typically resulting from additional funding requests, credit line extensions, or deal expansions.",
+        "Cashless Roll": "A transaction where an existing commitment is rolled over or extended without requiring a new cash settlement, often used to restructure obligations or maintain continuity in funding."
+    },
+    "fields": ["deal_name", "amount", "transaction_date"]
+},
+    "Fee Payment": {
+    "description": "Payments related to fees associated with financial agreements, loan services, or credit facilities. These payments cover recurring or transaction-based charges incurred as part of maintaining financial obligations.",
+    "subcategories": {
+        "Ongoing Fee": "Recurring fees charged for continuous services, loan maintenance, or administrative costs.",
+        "Letter of Credit Fee": "Fees associated with issuing, maintaining, or amending a letter of credit, typically charged to facilitate trade or financial transactions."
+    },
+    "fields": ["deal_name", "amount", "transaction_date", "account_number"]
+},
+
     "Money Movement - Inbound": {
-        "description": "Any money coming into the bank, such as customer loan repayments, incoming wire transfers, and deposits.",
-        "subcategories": {
-            "Customer Loan Repayment": "A customer is making a payment towards their loan balance.",
-            "Incoming Wire Transfer": "Funds received via wire transfer from another bank or financial institution.",
-            "Deposit Received": "A deposit made into a customer account or loan payment."
-        },
-        "fields": ["deal_name", "amount", "transaction_date"]
+    "description": "Transactions involving funds being received by the bank, such as loan repayments, interest payments, or capital contributions. These transactions may include customer repayments, scheduled interest settlements, and combined payments covering multiple financial obligations.",
+    "subcategories": {
+        "Principal": "A payment that solely covers the repayment of the original loan amount without any interest or additional charges.",
+        "Interest": "A payment made to cover accrued interest on a loan or financial obligation, separate from the principal amount.",
+        "Principal + Interest": "A combined payment that includes both the repayment of the original loan amount and the interest accrued on it.",
+        "Principal + Interest + Fee": "A comprehensive payment that includes the principal repayment, interest charges, and any associated service or processing fees."
     },
-    "Money Movement - Outbound": {
-        "description": "Any money going out of the bank, such as loan disbursements, refunds, or wire transfers sent to customers.",
-        "subcategories": {
-            "Loan Disbursement": "Funds released to a borrower as part of a loan agreement.",
-            "Customer Refund": "A refund issued to a customer due to overpayment or service issue.",
-            "Wire Transfer Sent": "Funds sent to another account via wire transfer."
-        },
-        "fields": ["deal_name", "amount", "transaction_date"]
+    "fields": ["deal_name", "amount", "transaction_date", "account_number"]
+}
+,
+   "Money Movement - Outbound": {
+    "description": "Transactions involving funds leaving the bank, such as loan disbursements, scheduled payouts, or international transfers. These transactions may include time-sensitive disbursements or foreign currency transactions requiring special handling and exchange rate considerations.",
+    "subcategories": {
+        "Timebound": "A scheduled or deadline-driven fund transfer, such as a loan disbursement, contractually obligated payout, or settlement that must be completed within a specific timeframe.",
+        "Foreign Currency": "An outbound transaction where funds are sent in a currency different from the base account currency, requiring exchange rate conversions and potentially additional processing fees."
     },
-    "Billing Issue": {
-        "description": "Customer inquiries related to incorrect charges, missing payments, or overcharges on accounts.",
-        "subcategories": {
-            "Incorrect Charge": "A customer disputes a charge on their account.",
-            "Missing Payment": "A customer claims a payment was made but not credited.",
-            "Overcharge": "A customer was charged more than expected."
-        },
-        "fields": ["invoice_number", "billing_date", "amount"]
-    }
+    "fields": ["deal_name", "amount", "transaction_date", "currency"]
+}
 }
 
 # Regex patterns for data extraction
@@ -166,7 +194,8 @@ def classify_email(content):
                 "request_type": top_main_request,
                 "sub_request_type": top_sub_request,
                 "reason": sub_reason,
-                "confidence": round(min(main_confidence, sub_confidence), 4),
+                "confidence": round((0.7 * main_confidence) + (0.3 * sub_confidence), 4),
+                #"confidence": round(sub_confidence, 4),
                 "extracted_data": extracted_data
             }
 
@@ -215,7 +244,7 @@ def process_email_directory(directory):
 
 if __name__ == "__main__":
     # Directory containing email files
-    EMAIL_DIRECTORY = "/Users/paramita.santra/impks/hackhive-2025/emails"
+    EMAIL_DIRECTORY = "/Users/paramita.santra/impks/hackhive-2025/emails-new"
     
     # Process emails and get results
     classification_results = process_email_directory(EMAIL_DIRECTORY)
