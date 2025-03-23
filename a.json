@@ -4,7 +4,7 @@
         "confidence_score": "",
         "sub_category": {
             "name": "Principal",
-            "confidence_score": ""
+            "confidence_score": "1"
         },
         "extracted_fields": {
             "deal_name": "Project Delta",
@@ -17,8 +17,8 @@
             "category": "Money Movement - Inbound",
             "confidence_score": "",
             "sub_category": {
-                "name": "Interest",
-                "confidence_score": ""
+                "name": "Principal + Interest",
+                "confidence_score": "0.95"
             },
             "extracted_fields": {
                 "deal_name": "Project Delta",

@@ -11,6 +11,8 @@ instructions_file = "resources/instructions.txt"
 data_folder = "data"  # Folder containing PDFs
 request_file = "resources/request.txt"  # Output file for the final prompt
 
+
+
 # Function to read content from a text file
 def extract_json_block(text):
     match = re.search(r'```json\n(.*?)\n```', text, re.DOTALL)
@@ -78,10 +80,17 @@ for item in json.loads(response_content):
     associated_text = item.get("associated_text", "No associated text found.")
     
     print(f"📌 {category}: {associated_text}")
+    
+    # Load ruleset
+    sub_categories_file_mapping = read_file("resources/ruleset_files.json")
+    print(sub_categories_file_mapping)
+    sub_categories_file_name = json.loads(sub_categories_file_mapping)[category]
+    if sub_categories_file_name:
+        sub_categories = read_file(sub_categories_file_name)
 
     # ✅ Only process "Money Movement - Inbound"
-    if category == "Money Movement - Inbound":
-        sub_categories = read_file("resources/sub-money-movement-inbound.txt")
+    #if category == "Money Movement - Inbound":
+        #sub_categories = read_file("resources/sub-category-money-movement-inbound.txt")
         sub_objective = read_file("resources/sub_objective.txt")
         sub_instructions = read_file("resources/sub_instructions.txt")
 
