@@ -97,12 +97,14 @@ print(response['message']['content'])
 
 print(response)
 
-# Parse the response
-'''
-try:
-    output = json.loads(response["response"])  # Parse the JSON output
-    print(json.dumps(output, indent=4))       # Pretty-print the JSON
-except json.JSONDecodeError:
-    print("Error: The model's response is not valid JSON.")
-    print("Raw Response:", response["response"])
-'''
+print("--------------------")
+# Extract only the content (the JSON string) from the response
+json_content = response['message']['content']
+
+# Parse the JSON string into a Python object (optional, if you need to work with it programmatically)
+parsed_json = json.loads(json_content)
+
+# Print or return the clean JSON array without metadata
+print(json.dumps(parsed_json, indent=4))
+
+#Loop through the JSON array and print the associated_text
