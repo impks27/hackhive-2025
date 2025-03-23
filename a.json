@@ -1,0 +1,31 @@
+[
+    {
+        "category": "Money Movement - Inbound",
+        "confidence_score": "",
+        "sub_category": {
+            "name": "Principal",
+            "confidence_score": ""
+        },
+        "extracted_fields": {
+            "deal_name": "Project Delta",
+            "amount": "$500",
+            "transaction_date": "March 25, 2025",
+            "account_number": "ACC98765",
+            "currency": "USD"
+        }
+    },{
+            "category": "Money Movement - Inbound",
+            "confidence_score": "",
+            "sub_category": {
+                "name": "Interest",
+                "confidence_score": ""
+            },
+            "extracted_fields": {
+                "deal_name": "Project Delta",
+                "amount": "$500",
+                "transaction_date": "March 25, 2025",
+                "account_number": "ACC98765",
+                "currency": "USD"
+        }
+    }
+]

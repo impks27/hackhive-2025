@@ -1,3 +1,4 @@
+import json
 import ollama
 import fitz  # PyMuPDF for reading PDFs
 import os
@@ -58,8 +59,26 @@ print(f"📂 Final prompt saved to {request_file}")
 print("🚀 Sending the prompt to the AI model... Stand by for classification!")
 
 # Send the prompt to the model
-response = ollama.chat(model="0xroyce/plutus:latest", messages=[{'role': 'user', 'content': prompt}])
+response = ollama.chat(model="0xroyce/plutus:latest", messages=[{'role': 'user', 'content': prompt}]) #deepseek-r1:14b
 
 # Print the response content
 print("📊 Data processed! Here’s the classified breakdown:")
-print(response['message']['content'])
+response_output = response['message']['content']
+print(response_output)
+
+# Loop through response and print associated text for each category
+for item in json.loads(response_output): 
+    category = item["classification"]["category"]
+    if (category == "Money Movement - Inbound"):
+        associated_text = item["associated_text"]
+        print(f"📌 {category}: {associated_text}")
+        sub_categories = read_file("resources/sub-money-movement-inbound.txt")
+        sub_objectice = read_file("resources/sub_objective.txt")
+        sub_instructions = read_file("resources/sub_instructions.txt")
+        prompt_sub = f"{sub_objectice}\n\n{sub_categories}\n\nEmail to Classify:\n{associated_text}\n\n{sub_instructions}"
+        print(f"📂 Here's the sub prompt for:")
+        print(prompt_sub)
+        response_sub = ollama.chat(model="0xroyce/plutus:latest", messages=[{'role': 'user', 'content': prompt_sub}]) #deepseek-r1:14b
+        print("📊 Data processed! Here’s the classified breakdown:")
+        response_output = response_sub['message']['content']
+        print(response_output)

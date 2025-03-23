@@ -15,8 +15,8 @@ Categories:
     * Description: This is when we handle payments for extra charges tied to money deals or loans. It's like collecting the costs for keeping things running or making special changes.
     * Sample Email: Submit a fee payment of $250 for Deal KLM on 03/15/2025, account 54321.
 6. Category Name: Money Movement - Inbound
-    * Description: This is when money comes into the bank from outside. It could be someone paying back a loan, sending interest, or covering fees—basically any cash flowing our way.
+    * Description: This refers to any transaction where money flows into the bank from an external source. It includes loan repayments, interest payments, fees collected, or any deposits received from customers or third parties. These transactions increase the bank’s balance and are typically marked as credits.
     * Sample Email: Receive $14,000 inbound for Deal MNO on 03/25/2025, account 77889.
 7. Category Name: Money Movement - Outbound
-    * Description: This is when money leaves the bank to go somewhere else. It includes things like sending out loans, paying someone, or moving funds to another account or place. Basically, any time the bank sends cash outward.
+    * Description: This refers to any transaction where money leaves the bank to an external entity. It includes loan disbursements, fund transfers, vendor payments, or any outgoing payments initiated by the bank. These transactions reduce the bank’s balance and are typically marked as debits.
     * Sample Email: Transfer $16,500 for Deal YZA on 03/26/2025 in USD.

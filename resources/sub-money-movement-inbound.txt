@@ -1,0 +1,17 @@
+Categories:
+1. Category Name: Principal
+    * Description: This is when someone pays back just the original chunk of cash they borrowed. No extras, just the straight-up loan amount coming back to us.
+    * Sample Email: Receive $15,000 principal payment for Deal NOP on 03/18/2025, account 98765.
+    * Sample Email: Record $12,500 principal for Deal ZAB on 03/27/2025, account 22334.
+2. Category Name: Interest
+    * Description: This is the extra cash someone owes for borrowing—like a little thank-you fee for using our money. It’s the interest that’s stacked up.
+    * Sample Email: Record $1,200 interest payment for Deal QRS on 03/20/2025, account 45678.
+    * Sample Email: Receive $950 interest for Deal CDE on 03/29/2025, account 66778.
+3. Category Name: Principal + Interest
+    * Description: This is when someone sends us both the original loan amount and the interest in one big payment. It’s like knocking out two bills at once.
+    * Sample Email: Process $20,000 principal + interest payment for Deal TUV on 03/21/2025, account 11223.
+    * Sample Email: Receive $18,000 principal and interest for Deal FGH on 03/30/2025, account 88990.
+4. Category Name: Principal + Interest + Fee
+    * Description: This is the whole deal—principal, interest, and some fees all bundled together. It’s like they’re clearing the table with one fat stack of cash.
+    * Sample Email: Receive $25,000 including principal, interest, and fees for Deal WXY on 03/22/2025, account 33445.
+    * Sample Email: Process $30,000 payment covering principal, interest, and fees for Deal IJK on 03/31/2025, account 55667.
