@@ -45,7 +45,7 @@ Instructions:
     * transaction_date
     * account_number
     * currency
-5. Include the complete text from the email that is considered for classification under the key "associated_text".
+5. Include the specific portion of the email text directly relevant to each classified transaction under the key "associated_text". This should be the exact text segment that supports the classification, excluding unrelated parts of the email, to provide precise context for each category.
 6. Provide a brief explanation for each classification.
 7. Provide the output in the following JSON format. Below mentioned is a sample. Do not consider this example as an input for classification. 
 [
@@ -96,15 +96,3 @@ response = ollama.chat(model="0xroyce/plutus:latest", messages=[{'role': 'user',
 print(response['message']['content'])
 
 print(response)
-
-print("--------------------")
-# Extract only the content (the JSON string) from the response
-json_content = response['message']['content']
-
-# Parse the JSON string into a Python object (optional, if you need to work with it programmatically)
-parsed_json = json.loads(json_content)
-
-# Print or return the clean JSON array without metadata
-print(json.dumps(parsed_json, indent=4))
-
-#Loop through the JSON array and print the associated_text

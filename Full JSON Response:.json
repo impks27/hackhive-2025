@@ -1,0 +1,48 @@
+Full JSON Response:
+[
+    {
+        "classification": {
+            "category": "Money Movement - Inbound",
+            "confidence_score": 1.0
+        },
+        "extracted_fields": {
+            "deal_name": "Project Delta",
+            "amount": "$2,000",
+            "transaction_date": "03/24/2025",
+            "account_number": "ACC98765",
+            "currency": "NA"
+        },
+        "associated_text": "Loan Services Request Date: March 22, 2025 To: Loan Services Team Subject: Multiple Inbound Payment Requests for Project Delta Dear Team, Please process an inbound payment for Deal Name: Project Delta. Amount: $2,000. Transaction Date: 03/24/2025. Account Number: ACC98765. This payment covers the principal amount of the loan. Additionally, we have another inbound payment for the same deal. Amount: $500. Transaction Date: 03/25/2025. Account Number: ACC98765. This is to cover the interest accrued this month. Furthermore, we'd like to adjust the fee structure for Project Delta. Amount: $100. Transaction Date: 03/26/2025. This adjustment is due to a recent amendment in terms. Best regards, Alex Carter",
+        "explanation": "The email requests processing an inbound payment of $2,000 for Project Delta, covering the principal amount of the loan. This aligns with the 'Money Movement - Inbound' category as it involves money coming into the bank from an external source. The confidence score is very high (1.0) due to the clear match with the category description and sample email."
+    },
+    {
+        "classification": {
+            "category": "Money Movement - Inbound",
+            "confidence_score": 1.0
+        },
+        "extracted_fields": {
+            "deal_name": "Project Delta",
+            "amount": "$500",
+            "transaction_date": "03/25/2025",
+            "account_number": "ACC98765",
+            "currency": "NA"
+        },
+        "associated_text": "Additionally, we have another inbound payment for the same deal. Amount: $500. Transaction Date: 03/25/2025. Account Number: ACC98765. This is to cover the interest accrued this month.",
+        "explanation": "The email mentions an additional inbound payment of $500 for Project Delta to cover interest accrued, fitting the 'Money Movement - Inbound' category as it involves money flowing into the bank. The confidence score is very high (1.0) due to the explicit request and alignment with the category definition."
+    },
+    {
+        "classification": {
+            "category": "Adjustment",
+            "confidence_score": 0.95
+        },
+        "extracted_fields": {
+            "deal_name": "Project Delta",
+            "amount": "$100",
+            "transaction_date": "03/26/2025",
+            "account_number": "NA",
+            "currency": "NA"
+        },
+        "associated_text": "Loan Services Request Date: March 22, 2025 To: Loan Services Team Subject: Multiple Inbound Payment Requests for Project Delta Dear Team, Please process an inbound payment for Deal Name: Project Delta. Amount: $2,000. Transaction Date: 03/24/2025. Account Number: ACC98765. This payment covers the principal amount of the loan. Additionally, we have another inbound payment for the same deal. Amount: $500. Transaction Date: 03/25/2025. Account Number: ACC98765. This is to cover the interest accrued this month. Furthermore, we'd like to adjust the fee structure for Project Delta. Amount: $100. Transaction Date: 03/26/2025. This adjustment is due to a recent amendment in terms. Best regards, Alex Carter",
+        "explanation": "The email requests an adjustment to the fee structure for Project Delta by $100 due to a recent amendment, matching the 'Adjustment' category for tweaking an existing money deal. The confidence score is very high (0.95) as it closely aligns with the category description and sample email."
+    }
+]
