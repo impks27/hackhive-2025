@@ -3,6 +3,12 @@ import ollama
 import fitz  # PyMuPDF for reading PDFs
 import os
 import re
+import mailparser
+from typing import Dict, List, Optional, Tuple
+import pdfplumber
+import mailparser
+from transformers import pipeline
+from datetime import datetime
 
 # Define file paths for different sections
 objective_file = "resources/objective.txt"
@@ -18,6 +24,15 @@ def extract_json_block(text):
     match = re.search(r'```json\n(.*?)\n```', text, re.DOTALL)
     return match.group(1) if match else None
 
+def extract_text_from_pdf(self, pdf_path: str) -> str:
+    try:
+        with pdfplumber.open(pdf_path) as pdf:
+            text = " ".join(page.extract_text() or "" for page in pdf.pages)  # Replaced \n with space
+        return text
+    except Exception as e:
+        print(f"Error extracting text from {pdf_path}: {e}")
+        return ""
+
 def read_file(filename):
     try:
         with open(filename, "r", encoding="utf-8") as f:
@@ -26,8 +41,33 @@ def read_file(filename):
         print(f"Warning: {filename} not found.")
         return ""
 
+def extract_text_from_eml(self, eml_path: str) -> Tuple[str, str]:
+        try:
+            mail = mailparser.parse_from_file(eml_path)
+            email_body = f"Subject: {mail.subject} Body: {mail.body}"
+            attachment_text = ""
+            for attachment in mail.attachments:
+                content_type = attachment.get("content_type", "").lower()
+                payload = attachment.get("payload", "")
+                if "text/plain" in content_type:
+                    attachment_text += f" Attachment Text: {payload}"
+                elif "application/pdf" in content_type:
+                    import base64
+                    try:
+                        pdf_data = base64.b64decode(payload)
+                        with open("temp.pdf", "wb") as f:
+                            f.write(pdf_data)
+                        attachment_text += f" Attachment PDF: {extract_text_from_pdf('temp.pdf')}"
+                        os.remove("temp.pdf")
+                    except Exception as e:
+                        print(f"Error processing PDF attachment in {eml_path}: {e}")
+            return email_body, attachment_text
+        except Exception as e:
+            print(f"Error extracting text from {eml_path}: {e}")
+            return "", ""
+
 # Function to extract text from all PDFs in the data folder (single line per PDF)
-def extract_text_from_pdfs(folder):
+def extract_text_from_data_folder(folder):
     extracted_text = []
     if not os.path.exists(folder):
         print(f"Warning: Folder '{folder}' not found.")
@@ -42,7 +82,16 @@ def extract_text_from_pdfs(folder):
                     extracted_text.append(f"[{filename}]: {text}")
             except Exception as e:
                 print(f"Error reading {filename}: {e}")
-
+        if (filename.lower().endswith(".doc") or filename.lower().endswith(".doc")):  # Process only doc files
+            print("Get docs")
+        if filename.lower().endswith(".eml"):  # Process only eml files
+            email_text, attachment_text = extract_text_from_eml(filename)
+            print(f"email_text:",email_text)
+            print(f"attachment_text:",attachment_text)
+            extracted_text.append(f"[{filename}]: {email_text}")
+            extracted_text.append(f"\n--- Attachment Content --- {attachment_text}\n")
+            
+            
     return "\n".join(extracted_text) if extracted_text else ""
 
 # Read static sections
@@ -51,7 +100,7 @@ categories = read_file(categories_file)
 instructions = read_file(instructions_file)
 final_output = []
 # Extract email content from PDFs
-email_to_classify = extract_text_from_pdfs(data_folder)
+email_to_classify = extract_text_from_data_folder(data_folder)
 
 # Combine all sections into the final prompt
 prompt = f"{objective}\n\n{categories}\n\nEmail to Classify:\n{email_to_classify}\n\n{instructions}"
