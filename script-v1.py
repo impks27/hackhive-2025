@@ -1,12 +1,15 @@
 import ollama
+import fitz  # PyMuPDF for reading PDFs
+import os
 
 # Define file paths for different sections
 objective_file = "resources/objective.txt"
 categories_file = "resources/categories.txt"
-email_to_classify_file = "resources/email_to_classify.txt"
 instructions_file = "resources/instructions.txt"
+data_folder = "data"  # Folder containing PDFs
+request_file = "resources/request.txt"  # Output file for the final prompt
 
-# Function to read content from a file
+# Function to read content from a text file
 def read_file(filename):
     try:
         with open(filename, "r", encoding="utf-8") as f:
@@ -15,17 +18,44 @@ def read_file(filename):
         print(f"Warning: {filename} not found.")
         return ""
 
-# Read each section
+# Function to extract text from all PDFs in the data folder (single line per PDF)
+def extract_text_from_pdfs(folder):
+    extracted_text = []
+    if not os.path.exists(folder):
+        print(f"Warning: Folder '{folder}' not found.")
+        return ""
+
+    for filename in os.listdir(folder):
+        if filename.lower().endswith(".pdf"):  # Process only PDF files
+            pdf_path = os.path.join(folder, filename)
+            try:
+                with fitz.open(pdf_path) as doc:
+                    text = " ".join([page.get_text("text").replace("\n", " ") for page in doc]).strip()
+                    extracted_text.append(f"[{filename}]: {text}")
+            except Exception as e:
+                print(f"Error reading {filename}: {e}")
+
+    return "\n".join(extracted_text) if extracted_text else ""
+
+# Read static sections
 objective = read_file(objective_file)
 categories = read_file(categories_file)
-email_to_classify = read_file(email_to_classify_file)
 instructions = read_file(instructions_file)
 
-# Combine all sections into the final prompt
-prompt = f"{objective}\n\n{categories}\n\n{email_to_classify}\n\n{instructions}"
+# Extract email content from PDFs
+email_to_classify = extract_text_from_pdfs(data_folder)
 
+# Combine all sections into the final prompt
+prompt = f"{objective}\n\n{categories}\n\nEmail to Classify:\n{email_to_classify}\n\n{instructions}"
+
+# Save the prompt to a file
+os.makedirs(os.path.dirname(request_file), exist_ok=True)  # Ensure the folder exists
+with open(request_file, "w", encoding="utf-8") as f:
+    f.write(prompt)
+
+print("🤖 Gearing up the AI engine... Compiling the classification request!")
+print(f"📂 Final prompt saved to {request_file}")
 print("🚀 Sending the prompt to the AI model... Stand by for classification!")
-#print(prompt)
 
 # Send the prompt to the model
 response = ollama.chat(model="0xroyce/plutus:latest", messages=[{'role': 'user', 'content': prompt}])
