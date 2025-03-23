@@ -274,7 +274,7 @@ class StreamlitApp:
         os.makedirs(data_folder, exist_ok=True)
         for file_path in file_paths:
             dest_path = os.path.join(data_folder, os.path.basename(file_path))
-            os.rename(file_path, dest_path)  # Move file to data folder
+            #os.rename(file_path, dest_path)  # Move file to data folder
         
         # Run the analysis
         try:
