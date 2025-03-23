@@ -2,6 +2,7 @@ import json
 import ollama
 import fitz  # PyMuPDF for reading PDFs
 import os
+import re
 
 # Define file paths for different sections
 objective_file = "resources/objective.txt"
@@ -11,6 +12,10 @@ data_folder = "data"  # Folder containing PDFs
 request_file = "resources/request.txt"  # Output file for the final prompt
 
 # Function to read content from a text file
+def extract_json_block(text):
+    match = re.search(r'```json\n(.*?)\n```', text, re.DOTALL)
+    return match.group(1) if match else None
+
 def read_file(filename):
     try:
         with open(filename, "r", encoding="utf-8") as f:
@@ -59,11 +64,12 @@ print(f"📂 Final prompt saved to {request_file}")
 print("🚀 Sending the prompt to the AI model... Stand by for classification!")
 
 # Send the prompt to the model
-response = ollama.chat(model="0xroyce/plutus:latest", messages=[{'role': 'user', 'content': prompt}]) #deepseek-r1:14b
+response = ollama.chat(model="deepseek-r1:14b", messages=[{'role': 'user', 'content': prompt}]) #deepseek-r1:14b, 0xroyce/plutus:latest
 
 # Print the response content
 print("📊 Data processed! Here’s the classified breakdown:")
-response_content = response['message']['content']
+response_content_text = response['message']['content']
+response_content = extract_json_block(response_content_text)
 print(response_content)
 
 #🔄 Loop through response and process categories
@@ -85,10 +91,11 @@ for item in json.loads(response_content):
         #print(prompt_sub)
 
         #🔥 Send sub-classification request
-        response_sub = ollama.chat(model="0xroyce/plutus:latest", messages=[{'role': 'user', 'content': prompt_sub}]) 
+        response_sub = ollama.chat(model="deepseek-r1:14b", messages=[{'role': 'user', 'content': prompt_sub}]) 
 
         print("📊 Sub-classification processed! Here’s the breakdown:")
-        response_sub_content = response_sub['message']['content']
+        response_sub_content_text = response_sub['message']['content']
+        response_sub_content = extract_json_block(response_sub_content_text)
 
         # ✅ Ensure sub-response is valid JSON
         try:
@@ -100,3 +107,4 @@ for item in json.loads(response_content):
             print("❌ ERROR: Sub-response is not valid JSON.")
             print(response_sub_content)
 # Switching to deep seek after this
+

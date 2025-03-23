@@ -1,6 +1,6 @@
 Instructions:
-1. Analyze the email content and assign it to the most appropriate categories based on the provided descriptions and sample emails.
-2. If the email contains text that belongs to multiple categories, create a JSON array where each object represents a distinct category, its associated fields, and the text from the email that supports the classification.
+1. Forget any previous processign histry or cache. Start fresh. Analyze the email content and assign it to the most appropriate categories based on the provided descriptions and sample emails.
+2. If the email contains text that belongs to multiple categories, create a JSON array where each object represents a distinct category, its associated fields, and the text from the email that supports the classification. Do not combine data for similar categories. Keep them separate.
 3. Provide a confidence score for each classification between 0 and 1, where:
     * 0.9-1.0: Very confident
     * 0.7-0.89: Confident
