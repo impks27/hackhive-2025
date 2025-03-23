@@ -63,22 +63,39 @@ response = ollama.chat(model="0xroyce/plutus:latest", messages=[{'role': 'user',
 
 # Print the response content
 print("📊 Data processed! Here’s the classified breakdown:")
-response_output = response['message']['content']
-print(response_output)
+response_content = response['message']['content']
+print(response_content)
 
-# Loop through response and print associated text for each category
-for item in json.loads(response_output): 
+#🔄 Loop through response and process categories
+for item in json.loads(response_content): 
     category = item["classification"]["category"]
-    if (category == "Money Movement - Inbound"):
-        associated_text = item["associated_text"]
-        print(f"📌 {category}: {associated_text}")
+    associated_text = item.get("associated_text", "No associated text found.")
+    
+    print(f"📌 {category}: {associated_text}")
+
+    # ✅ Only process "Money Movement - Inbound"
+    if category == "Money Movement - Inbound":
         sub_categories = read_file("resources/sub-money-movement-inbound.txt")
-        sub_objectice = read_file("resources/sub_objective.txt")
+        sub_objective = read_file("resources/sub_objective.txt")
         sub_instructions = read_file("resources/sub_instructions.txt")
-        prompt_sub = f"{sub_objectice}\n\n{sub_categories}\n\nEmail to Classify:\n{associated_text}\n\n{sub_instructions}"
-        print(f"📂 Here's the sub prompt for:")
-        print(prompt_sub)
-        response_sub = ollama.chat(model="0xroyce/plutus:latest", messages=[{'role': 'user', 'content': prompt_sub}]) #deepseek-r1:14b
-        print("📊 Data processed! Here’s the classified breakdown:")
-        response_output = response_sub['message']['content']
-        print(response_output)
+
+        prompt_sub = f"{sub_objective}\n\n{sub_categories}\n\nEmail to Classify:\n{associated_text}\n\n{sub_instructions}"
+        
+        #print("📂 Here's the sub prompt for further classification:")
+        #print(prompt_sub)
+
+        #🔥 Send sub-classification request
+        response_sub = ollama.chat(model="0xroyce/plutus:latest", messages=[{'role': 'user', 'content': prompt_sub}]) 
+
+        print("📊 Sub-classification processed! Here’s the breakdown:")
+        response_sub_content = response_sub['message']['content']
+
+        # ✅ Ensure sub-response is valid JSON
+        try:
+            #response_sub_output = json.loads(response_sub_content)  # Convert string to JSON
+            #print(json.dumps(response_sub_content, indent=4))  # Pretty print the JSON output
+            print("Here the sub category response with confidence score:")
+            print(response_sub_content)
+        except json.JSONDecodeError:
+            print("❌ ERROR: Sub-response is not valid JSON.")
+            print(response_sub_content)

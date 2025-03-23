@@ -7,14 +7,9 @@ Instructions:
     * 0.5-0.69: Somewhat confident
     * Below 0.5: Not confident
 4. Provide a brief explanation for each classification.
-5. Provide the output in the following JSON format. Below mentioned is a sample. Do not consider this example as an input for classification. 
-[
-    {
-        "classification": {
-            "category": "Adjustment",
-            "confidence_score": 0.85
-        },
-        "explanation": "The email mentions an adjustment to the fee structure, which aligns with the 'Adjustment' category. The confidence score is high (0.85) because the email clearly describes a fee adjustment."
-    }
-]
-6. The email can only be classified as one category. Include the one in resonse with highest confidence.
+5. The email can only be classified as one category. Include the one in resonse with highest confidence.
+6. Provide the output in the following JSON format. Do not include additional text. Below mentioned is a sample. Do not consider this example as an input for classification. 
+{
+    "category": "Adjustment",
+    "confidence_score": 0.85
+}
