@@ -31,7 +31,6 @@ Categories:
 Email to Classify:
 Loan Services Request Date: March 22, 2025 To: Loan Services Team Subject: Multiple Inbound Payment Requests for Project Delta Dear Team, Please process an inbound payment for Deal Name: Project Delta. Amount: $2,000. Transaction Date: 03/24/2025. Account Number: ACC98765. This payment covers the principal amount of the loan. Additionally, we have another inbound payment for the same deal. Amount: $500. Transaction Date: 03/25/2025. Account Number: ACC98765. This is to cover the interest accrued this month. Furthermore, we'd like to adjust the fee structure for Project Delta. Amount: $100. Transaction Date: 03/26/2025. This adjustment is due to a recent amendment in terms. Best regards, Alex Carter
 
-
 Instructions:
 1. Analyze the email content and assign it to the most appropriate categories based on the provided descriptions and sample emails.
 2. If the email contains text that belongs to multiple categories, create a JSON array where each object represents a distinct category, its associated fields, and the text from the email that supports the classification.
@@ -48,7 +47,7 @@ Instructions:
     * currency
 5. Include the complete text from the email that is considered for classification under the key "associated_text".
 6. Provide a brief explanation for each classification.
-7. Provide the output in the following JSON format:
+7. Provide the output in the following JSON format. Below mentioned is a sample. Do not consider this example as an input for classification. 
 [
     {
         "classification": {
