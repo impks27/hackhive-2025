@@ -24,10 +24,12 @@ instructions = read_file(instructions_file)
 # Combine all sections into the final prompt
 prompt = f"{objective}\n\n{categories}\n\n{email_to_classify}\n\n{instructions}"
 
-print(prompt)
+print("🚀 Sending the prompt to the AI model... Stand by for classification!")
+#print(prompt)
 
 # Send the prompt to the model
 response = ollama.chat(model="0xroyce/plutus:latest", messages=[{'role': 'user', 'content': prompt}])
 
 # Print the response content
+print("📊 Data processed! Here’s the classified breakdown:")
 print(response['message']['content'])
