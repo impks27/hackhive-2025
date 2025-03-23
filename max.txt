@@ -1,0 +1,286 @@
+segment:  The commitment amount for Deal PQR has been decreased by $5,000 on 03/23/2025.
+segment:  Commitment for Deal RST has been rolled over without additional cash on 03/25/2025.
+segment:  An inbound principal payment of $12,000 for Deal GHI was received on 03/28/2025.
+segment:  A foreign currency payment of EUR7,500 for Deal WXY has been processed on 04/02/2025.
+segment:  We have increased the commitment for Deal LMN by $8,000 effective 03/24/2025.
+segment:  A scheduled outbound transfer of $9,000 for Deal TUV is set for 04/01/2025.
+segment:  A recurring fee of $300 has been applied to Deal UVW on 03/26/2025.
+segment:  An interest payment of $1,500 for Deal JKL was received on 03/29/2025.
+segment:  This notice confirms a reallocation fee of $500 for Deal ABC on 03/20/2025.
+segment:  A full payment including principal, interest, and fees totaling $15,000 was received for Deal QRS on
+03/31/2025.
+segment:  A letter of credit fee of $450 has been charged for Deal XYZ on 03/27/2025.
+segment:  An amendment fee of $750 has been charged for modifying Deal XYZ on 03/21/2025.
+segment:  A combined principal and interest payment of $13,500 was received for Deal MNO on 03/30/2025.
+segment:  Reallocation of principal amount $10,000 for Deal DEF on 03/22/2025 has been approved.
+
+📌 Classification Results:
+
+[
+  {
+    "file": "Decrease.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.7975,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Cashless_Roll.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.6054,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Principal.pdf",
+    "classifications": [
+      {
+        "request_type": "Money Movement - Inbound",
+        "sub_request_type": "Principal + Interest",
+        "reason": {
+          "description": "This is when someone pays back both the main amount and the extra cost together. It\u2019s a combo payment."
+        },
+        "confidence": 0.3776,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found",
+          "account_number": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Foreign_Currency.pdf",
+    "classifications": [
+      {
+        "request_type": "Closing Notice",
+        "sub_request_type": "Reallocation Fees",
+        "reason": {
+          "description": "This is extra money we charge when we move funds or assets around inside a deal. Think of it as a fee for shuffling things to new spots."
+        },
+        "confidence": 0.4927,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "transaction_date": "Not Found",
+          "amount": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Increase.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.6799,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Timebound.pdf",
+    "classifications": [
+      {
+        "request_type": "Money Movement - Outbound",
+        "sub_request_type": "Timebound",
+        "reason": {
+          "description": "This is when money has to be sent out by a specific time or date. Think of it like a deadline\u2014maybe a payment is due, or funds need to reach someone by a set day. It\u2019s planned and time-sensitive."
+        },
+        "confidence": 0.7833,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found",
+          "currency": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Ongoing_Fee.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.6493,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Interest.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.6585,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Reallocation_Fees.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.5737,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Principal_+_Interest_+_Fee.pdf",
+    "classifications": [
+      {
+        "request_type": "Closing Notice",
+        "sub_request_type": "Reallocation Fees",
+        "reason": {
+          "description": "This is extra money we charge when we move funds or assets around inside a deal. Think of it as a fee for shuffling things to new spots."
+        },
+        "confidence": 0.5143,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "transaction_date": "Not Found",
+          "amount": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Letter_of_Credit_Fee.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.6498,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Amendment_Fees.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.6651,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Principal_+_Interest.pdf",
+    "classifications": [
+      {
+        "request_type": "AU Transfer",
+        "sub_request_type": "NA",
+        "reason": "This is about moving money between different parts of a financial setup, called Allocation Units (AU). It\u2019s like shifting a chunk of cash from one bucket to another in the same system, usually the main amount someone borrowed.",
+        "confidence": 0.1983,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "Not Found",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  },
+  {
+    "file": "Reallocation_Principal.pdf",
+    "classifications": [
+      {
+        "request_type": "Commitment Change",
+        "sub_request_type": "Decrease",
+        "reason": {
+          "description": "This is when we lower the amount of money we promised. It\u2019s like saying we\u2019ll commit less cash than before."
+        },
+        "confidence": 0.5797,
+        "extracted_data": {
+          "deal_name": "Not Found",
+          "amount": "10,000",
+          "transaction_date": "Not Found"
+        },
+        "is_primary": true
+      }
+    ]
+  }
+]

@@ -1,3 +1,60 @@
+segment:  Reallocation of Principal Amount
+Dear Team,
+Please process the reallocation of the principal amount for the deal 'Project Sunrise' amounting to
+$5,000,000. The transaction date is set for March 25, 2025.
+Best,
+Finance Dept.
+Classification Details
+Request Type: Adjustment
+Subcategory: Reallocation Principal
+Extracted Fields:
+deal_name: Project Sunrise
+amount: $5,000,000
+transaction_date: March 25, 2025
+segment:  Money Movement - Inbound: Principal + Interest
+Dear Accounts Team,
+We have received an inbound transfer of $3,500,000 for the deal 'Beta Investments'. This includes
+principal and interest. Transaction date: March 20, 2025. Kindly update the records accordingly.
+Regards,
+Treasury Department.
+Classification Details
+Request Type: Money Movement-Inbound
+Subcategory: Principal + Interest
+Extracted Fields:
+deal_name: Beta Investments
+amount: $3,500,000
+transaction_date: March 20, 2025
+account_number: 12345678
+segment:  Commitment Increase Request
+Hello,
+We would like to request an increase in the committed loan amount for 'Alpha Holdings'. Please
+increase the commitment by $2,000,000 effective from April 1, 2025.
+Thank you.
+Finance Team.
+Classification Details
+Request Type: Commitment Change
+Subcategory: Increase
+Extracted Fields:
+deal_name: Alpha Holdings
+amount: $2,000,000
+transaction_date: April 1, 2025
+segment:  Fee Payment - Letter of Credit Fee
+Dear Finance Team,
+Please process the payment of $15,000 for the Letter of Credit Fee related to the 'Delta Corp'
+agreement. Transaction Date: March 22, 2025.
+Best,
+Accounts Payable.
+Classification Details
+Request Type: Fee Payment
+Subcategory: Letter of Credit Fee
+Extracted Fields:
+deal_name: Delta Corp
+amount: $15,000
+transaction_date: March 22, 2025
+account_number: 98765432
+
+📌 Classification Results:
+
 [
   {
     "file": "sample_email_1.pdf",

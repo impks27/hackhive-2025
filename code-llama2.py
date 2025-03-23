@@ -20,115 +20,175 @@ except Exception as e:
     raise
 
 # Request Type Definitions (Main & Subcategories)
+# REQUEST_TYPES = {
+#     # "Adjustment": {
+#     #     "description": "This is when we change something about a money deal that’s already set up. It could be tweaking how much someone owes, updating fees, or fixing details in an agreement. It’s like making small updates to keep things right.",
+#     #     "fields": ["deal_name", "amount", "transaction_date"],
+#     #     "examples": [
+#     #         "Please adjust the fee structure for Deal XYZ to $5000 effective 03/15/2025.",
+#     #         "Modify the principal of Deal RST by $7500 on 03/25/2025."
+#     #     ]
+#     # },
+#     "AU Transfer": {
+#         "description": "This is about moving money between different parts of a financial setup, called Allocation Units (AU). It’s like shifting a chunk of cash from one bucket to another in the same system, usually the main amount someone borrowed.",
+#         "fields": ["deal_name", "amount", "transaction_date"],
+#         "examples": [
+#             "Transfer $10,000 from Deal ABC to Deal DEF on 03/20/2025.",
+#             "Move $8,500 in Allocation Units for Deal UVW to Deal XYZ on 03/23/2025."
+#         ]
+#     },
+#     "Closing Notice": {
+#         "description": "This is when we tell people a money deal is ending or changing in a big way. It’s like sending a heads-up that we’re wrapping things up or tweaking something major, so everyone knows what’s happening.",
+#         "subcategories": {
+#             "Reallocation Fees": {
+#                 "description": "This is extra money we charge when we move funds or assets around inside a deal. Think of it as a fee for shuffling things to new spots."
+#             },
+#             "Amendment Fees": {
+#                 "description": "This is a charge for changing the rules or terms of a deal. It’s like a fee for editing the agreement to make it work better."
+#             },
+#             "Reallocation Principal": {
+#                 "description": "This is when we adjust the main amount of money in a deal while moving it around. It’s like updating the core cash amount during a shuffle."
+#             }
+#         },
+#         "fields": ["deal_name", "transaction_date", "amount"],
+#         "examples": [
+#             "Issue a closing notice for Deal PQR with a $1000 adjustment on 03/19/2025.",
+#             "Notify termination of Deal BCD with $2,500 adjustment on 03/28/2025."
+#         ]
+#     },
+#     "Commitment Change": {
+#         "description": "This is when we adjust how much money we’ve promised to give or hold for a loan or credit deal. It’s like changing our pledge—maybe giving more, less, or just rolling it over without extra cash.",
+#         "subcategories": {
+#             "Decrease": {
+#                 "description": "This is when we lower the amount of money we promised. It’s like saying we’ll commit less cash than before."
+#             },
+#             "Increase": {
+#                 "description": "This is when we raise the amount of money we promised. It’s like agreeing to put more cash on the table."
+#             },
+#             "Cashless Roll": {
+#                 "description": "This is when we keep the promise going without adding new money. It’s like renewing the deal as-is, no cash needed."
+#             }
+#         },
+#         "fields": ["deal_name", "amount", "transaction_date"],
+#         "examples": [
+#             "Adjust commitment for Deal BCD by $3,000 on 03/14/2025.",
+#             "Change commitment level for Deal NOP by $4,500 on 03/27/2025."
+#         ]
+#     },
+#     "Fee Payment": {
+#         "description": "This is when we handle payments for extra charges tied to money deals or loans. It’s like collecting the costs for keeping things running or making special changes.",
+#         "subcategories": {
+#             "Ongoing Fee": {
+#                 "description": "This is a regular charge we keep taking for ongoing services, like maintaining a loan. It’s like a monthly bill for keeping everything in order."
+#             },
+#             "Letter of Credit Fee": {
+#                 "description": "This is a charge for setting up or changing a promise to pay someone later. It’s like a fee for a financial IOU we issue or tweak."
+#             }
+#         },
+#         "fields": ["deal_name", "amount", "transaction_date", "account_number"],
+#         "examples": [
+#             "Submit a fee payment of $250 for Deal KLM on 03/15/2025, account 54321.",
+#             "Process $175 fee payment for Deal WXY on 03/24/2025, account 77665."
+#         ]
+#     },
+#     "Money Movement - Inbound": {
+#         "description": "This is when money comes into the bank from outside. It could be someone paying back a loan, sending interest, or covering fees—basically any cash flowing our way.",
+#         "subcategories": {
+#             "Principal": {
+#                 "description": "This is when someone pays back just the main amount they borrowed. It’s the core money, no extras like interest."
+#             },
+#             "Interest": {
+#                 "description": "This is when someone pays the extra cost for borrowing money. It’s like the fee they owe on top of the loan."
+#             },
+#             "Principal + Interest": {
+#                 "description": "This is when someone pays back both the main amount and the extra cost together. It’s a combo payment."
+#             },
+#             "Principal + Interest + Fee": {
+#                 "description": "This is when someone sends money that covers everything—the main amount, the extra cost, and any fees. It’s like paying the full bill at once."
+#             }
+#         },
+#         "fields": ["deal_name", "amount", "transaction_date", "account_number"],
+#         "examples": [
+#             "Record an inbound payment of $10,000 for Deal ZAB on 03/17/2025, account 66778.",
+#             "Receive $14,000 inbound for Deal MNO on 03/25/2025, account 77889."
+#         ]
+#     },
+#     "Money Movement - Outbound": {
+#         "description": "This is when money leaves the bank to go somewhere else. It includes things like sending out loans, paying someone, or moving funds to another account or place. Basically, any time the bank sends cash outward.",
+#         "subcategories": {
+#             "Timebound": {
+#                 "description": "This is when money has to be sent out by a specific time or date. Think of it like a deadline—maybe a payment is due, or funds need to reach someone by a set day. It’s planned and time-sensitive."
+#             },
+#             "Foreign Currency": {
+#                 "description": "This is when the bank sends money in a currency that’s not the usual one (like dollars). For example, sending euros or pounds instead of U.S. dollars to another country or account."
+#             }
+#         },
+#         "fields": ["deal_name", "amount", "transaction_date", "currency"],
+#         "examples": [
+#             "Send $12,000 outbound for Deal IJK on 03/14/2025 in USD.",
+#             "Transfer $16,500 for Deal YZA on 03/26/2025 in USD."
+#         ]
+#     }
+# }
+
 REQUEST_TYPES = {
-    # "Adjustment": {
-    #     "description": "This is when we change something about a money deal that’s already set up. It could be tweaking how much someone owes, updating fees, or fixing details in an agreement. It’s like making small updates to keep things right.",
-    #     "fields": ["deal_name", "amount", "transaction_date"],
-    #     "examples": [
-    #         "Please adjust the fee structure for Deal XYZ to $5000 effective 03/15/2025.",
-    #         "Modify the principal of Deal RST by $7500 on 03/25/2025."
-    #     ]
-    # },
-    "AU Transfer": {
-        "description": "This is about moving money between different parts of a financial setup, called Allocation Units (AU). It’s like shifting a chunk of cash from one bucket to another in the same system, usually the main amount someone borrowed.",
-        "fields": ["deal_name", "amount", "transaction_date"],
-        "examples": [
-            "Transfer $10,000 from Deal ABC to Deal DEF on 03/20/2025.",
-            "Move $8,500 in Allocation Units for Deal UVW to Deal XYZ on 03/23/2025."
-        ]
+  "Adjustment": {
+    "description": "Modifications or corrections made to an existing financial transaction or record, often to address discrepancies, update terms, or realign financial commitments.",
+    "subcategories": {
+      "Reallocation Fees": "Charges incurred for reallocating funds or assets between different accounts, tranches, or financial instruments within an agreement, often due to portfolio adjustments or strategy changes.",
+      "Amendment Fees": "Fees charged for making changes or amendments to an agreement or contract, such as adjusting interest rates, repayment schedules, or covenant terms, which require administrative processing and approval.",
+      "Reallocation Principal": "The principal amount that is reallocated between different allocations, tranches, or investment categories, usually within structured finance or syndicated loan agreements to optimize capital distribution."
     },
-    "Closing Notice": {
-        "description": "This is when we tell people a money deal is ending or changing in a big way. It’s like sending a heads-up that we’re wrapping things up or tweaking something major, so everyone knows what’s happening.",
-        "subcategories": {
-            "Reallocation Fees": {
-                "description": "This is extra money we charge when we move funds or assets around inside a deal. Think of it as a fee for shuffling things to new spots."
-            },
-            "Amendment Fees": {
-                "description": "This is a charge for changing the rules or terms of a deal. It’s like a fee for editing the agreement to make it work better."
-            },
-            "Reallocation Principal": {
-                "description": "This is when we adjust the main amount of money in a deal while moving it around. It’s like updating the core cash amount during a shuffle."
-            }
-        },
-        "fields": ["deal_name", "transaction_date", "amount"],
-        "examples": [
-            "Issue a closing notice for Deal PQR with a $1000 adjustment on 03/19/2025.",
-            "Notify termination of Deal BCD with $2,500 adjustment on 03/28/2025."
-        ]
+    "fields": ["deal_name", "amount", "transaction_date"]
+  },
+  "AU Transfer": {
+    "description": "Transfers related to the allocation of loan principal amounts within structured loan agreements, particularly in commercial or syndicated lending. AU Transfers involve reallocation of principal across different tranches, projects, or lenders, ensuring proper fund distribution.",
+    "subcategories": {
+      "Cashless Roll": "A transaction where an existing loan position is rolled over to a new agreement without requiring an additional cash settlement, often used in refinancing or restructuring scenarios to maintain financial stability."
     },
-    "Commitment Change": {
-        "description": "This is when we adjust how much money we’ve promised to give or hold for a loan or credit deal. It’s like changing our pledge—maybe giving more, less, or just rolling it over without extra cash.",
-        "subcategories": {
-            "Decrease": {
-                "description": "This is when we lower the amount of money we promised. It’s like saying we’ll commit less cash than before."
-            },
-            "Increase": {
-                "description": "This is when we raise the amount of money we promised. It’s like agreeing to put more cash on the table."
-            },
-            "Cashless Roll": {
-                "description": "This is when we keep the promise going without adding new money. It’s like renewing the deal as-is, no cash needed."
-            }
-        },
-        "fields": ["deal_name", "amount", "transaction_date"],
-        "examples": [
-            "Adjust commitment for Deal BCD by $3,000 on 03/14/2025.",
-            "Change commitment level for Deal NOP by $4,500 on 03/27/2025."
-        ]
+    "fields": ["deal_name", "amount", "transaction_date"]
+  },
+  "Closing Notice": {
+    "description": "Notification of the termination or closure of an account, loan facility, or financial agreement. Closing notices are issued to document the completion of financial obligations or changes in contractual terms.",
+    "subcategories": {
+      "Cashless Roll": "A loan restructuring technique that allows rolling over an existing debt without requiring an immediate cash payment, commonly used in refinancing or extending loan maturities."
     },
-    "Fee Payment": {
-        "description": "This is when we handle payments for extra charges tied to money deals or loans. It’s like collecting the costs for keeping things running or making special changes.",
-        "subcategories": {
-            "Ongoing Fee": {
-                "description": "This is a regular charge we keep taking for ongoing services, like maintaining a loan. It’s like a monthly bill for keeping everything in order."
-            },
-            "Letter of Credit Fee": {
-                "description": "This is a charge for setting up or changing a promise to pay someone later. It’s like a fee for a financial IOU we issue or tweak."
-            }
-        },
-        "fields": ["deal_name", "amount", "transaction_date", "account_number"],
-        "examples": [
-            "Submit a fee payment of $250 for Deal KLM on 03/15/2025, account 54321.",
-            "Process $175 fee payment for Deal WXY on 03/24/2025, account 77665."
-        ]
+    "fields": ["deal_name", "transaction_date"]
+  },
+  "Commitment Change": {
+    "description": "Alteration to an agreed obligation or pledge in a financial contract. Commitment changes occur when a borrower requests an increase or decrease in a credit facility, affecting available funds and potential interest costs.",
+    "subcategories": {
+      "Decrease": "Reduction in the committed loan amount or credit facility, often due to repayment, reduced financial needs, or changes in creditworthiness.",
+      "Increase": "Addition to the committed loan amount, typically approved based on a borrower's financial standing and projected needs, leading to increased borrowing capacity."
     },
-    "Money Movement - Inbound": {
-        "description": "This is when money comes into the bank from outside. It could be someone paying back a loan, sending interest, or covering fees—basically any cash flowing our way.",
-        "subcategories": {
-            "Principal": {
-                "description": "This is when someone pays back just the main amount they borrowed. It’s the core money, no extras like interest."
-            },
-            "Interest": {
-                "description": "This is when someone pays the extra cost for borrowing money. It’s like the fee they owe on top of the loan."
-            },
-            "Principal + Interest": {
-                "description": "This is when someone pays back both the main amount and the extra cost together. It’s a combo payment."
-            },
-            "Principal + Interest + Fee": {
-                "description": "This is when someone sends money that covers everything—the main amount, the extra cost, and any fees. It’s like paying the full bill at once."
-            }
-        },
-        "fields": ["deal_name", "amount", "transaction_date", "account_number"],
-        "examples": [
-            "Record an inbound payment of $10,000 for Deal ZAB on 03/17/2025, account 66778.",
-            "Receive $14,000 inbound for Deal MNO on 03/25/2025, account 77889."
-        ]
+    "fields": ["deal_name", "amount", "transaction_date"]
+  },
+  "Fee Payment": {
+    "description": "Disbursement of charges or dues for services, financial transactions, or loan management fees. These payments cover operational costs, interest, and administrative expenses associated with financial agreements.",
+    "subcategories": {
+      "Ongoing Fee": "Recurring charges for continuous services, such as maintenance fees, administration fees, or periodic financial management costs associated with a loan.",
+      "Letter of Credit Fee": "Charges for issuing or maintaining a letter of credit, which guarantees a borrower's payment obligations and mitigates risk for lenders and counterparties."
     },
-    "Money Movement - Outbound": {
-        "description": "This is when money leaves the bank to go somewhere else. It includes things like sending out loans, paying someone, or moving funds to another account or place. Basically, any time the bank sends cash outward.",
-        "subcategories": {
-            "Timebound": {
-                "description": "This is when money has to be sent out by a specific time or date. Think of it like a deadline—maybe a payment is due, or funds need to reach someone by a set day. It’s planned and time-sensitive."
-            },
-            "Foreign Currency": {
-                "description": "This is when the bank sends money in a currency that’s not the usual one (like dollars). For example, sending euros or pounds instead of U.S. dollars to another country or account."
-            }
-        },
-        "fields": ["deal_name", "amount", "transaction_date", "currency"],
-        "examples": [
-            "Send $12,000 outbound for Deal IJK on 03/14/2025 in USD.",
-            "Transfer $16,500 for Deal YZA on 03/26/2025 in USD."
-        ]
-    }
+    "fields": ["deal_name", "amount", "transaction_date", "account_number"]
+  },
+  "Money Movement-Inbound": {
+    "description": "Funds being received or deposited into an account, often from loan disbursements, customer payments, or investment inflows. Inbound money movement plays a crucial role in managing liquidity and financial planning.",
+    "subcategories": {
+      "Principal": "The original amount of a loan or investment that is deposited or received, excluding interest and additional fees, forming the base for financial transactions.",
+      "Interest": "The cost of borrowing money or the return on investment, representing the amount earned or owed over time due to financing arrangements.",
+      "Principal + Interest": "Combined payment of the original loan amount and the accrued interest, reflecting the total financial obligation due at a given time.",
+      "Principal+Interest+Fee": "Total payment including the original loan amount, interest charges, and additional service or administrative fees, covering all financial components of a loan repayment."
+    },
+    "fields": ["deal_name", "amount", "transaction_date", "account_number"]
+  },
+  "Money Movement - Outbound": {
+    "description": "Funds being sent or withdrawn from an account, often for loan repayments, vendor payments, or international transactions. Outbound money movements ensure financial obligations are met and capital is deployed effectively.",
+    "subcategories": {
+      "Timebound": "Transfer with specific time constraints, often due to contractual deadlines, maturity dates, or scheduled disbursements in financial agreements.",
+      "Foreign Currency": "Transaction involving currencies other than the base currency, which may include currency exchange costs, forex risk management, and cross-border payment considerations."
+    },
+    "fields": ["deal_name", "amount", "transaction_date", "account_number"]
+  }
 }
 
 # Regex patterns for data extraction
@@ -317,7 +377,7 @@ def process_email_directory(directory: str) -> List[Dict]:
 # --- Execution ---
 
 if __name__ == "__main__":
-    EMAIL_DIRECTORY = "/Users/paramita.santra/impks/hackhive-2025/test_pdfs"  #emails-new
+    EMAIL_DIRECTORY = "/Users/paramita.santra/impks/hackhive-2025/rahul-test-pdfs"  #test_pdfs #emails-new
     OUTPUT_FILE = "classification_results.json"
 
     classification_results = process_email_directory(EMAIL_DIRECTORY)
