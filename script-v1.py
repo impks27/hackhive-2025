@@ -49,7 +49,7 @@ def extract_text_from_pdfs(folder):
 objective = read_file(objective_file)
 categories = read_file(categories_file)
 instructions = read_file(instructions_file)
-
+final_output = []
 # Extract email content from PDFs
 email_to_classify = extract_text_from_pdfs(data_folder)
 
@@ -72,18 +72,20 @@ response = ollama.chat(model="deepseek-r1:14b", messages=[{'role': 'user', 'cont
 print("📊 Data processed! Here’s the classified breakdown:")
 response_content_text = response['message']['content']
 response_content = extract_json_block(response_content_text)
+classification_response = response_content
 print(response_content)
-
+sub_classification_response = []
 #🔄 Loop through response and process categories
 for item in json.loads(response_content): 
     category = item["classification"]["category"]
+    confidence_score = item["classification"]["confidence_score"]
     associated_text = item.get("associated_text", "No associated text found.")
+    extracted_fields = item.get("extracted_fields",[])
     
     print(f"📌 {category}: {associated_text}")
     
     # Load ruleset
     sub_categories_file_mapping = read_file("resources/ruleset_files.json")
-    print(sub_categories_file_mapping)
     sub_categories_file_name = json.loads(sub_categories_file_mapping)[category]
     if sub_categories_file_name:
         sub_categories = read_file(sub_categories_file_name)
@@ -112,8 +114,34 @@ for item in json.loads(response_content):
             #print(json.dumps(response_sub_content, indent=4))  # Pretty print the JSON output
             print("Here the sub category response with confidence score:")
             print(response_sub_content)
+            #sub_classification_response.append(response_sub_content)
+            sub_classification_response_json = json.loads(response_sub_content)
+            sub_category_name = sub_classification_response_json["category"]
+            sub_confidence_score = sub_classification_response_json["confidence_score"]
+            final_output.append({
+                    "category": category,
+                    "confidence_score": confidence_score,
+                    "sub_category": {
+                        "name": sub_category_name,
+                        "confidence_score": sub_confidence_score
+                    },
+                    "extracted_fields": extracted_fields
+                })           
         except json.JSONDecodeError:
             print("❌ ERROR: Sub-response is not valid JSON.")
             print(response_sub_content)
+    else:
+        final_output.append({
+                    "category": category,
+                    "confidence_score": confidence_score,
+                    "sub_category": {},
+                    "extracted_fields": extracted_fields
+                }) 
 # Switching to deep seek after this
+
+# Generate the final structured output
+# Convert to JSON format and print
+print("Here's the final output. Enjoy!")
+print(json.dumps(final_output, indent=4))
+
 

@@ -1,4 +1,4 @@
-paramita.santra@Paramitas-MacBook-Pro hackhive-2025 % python3 script-v1.py     
+paramita.santra@Paramitas-MacBook-Pro hackhive-2025 % python3 script-v1.py
 🤖 Gearing up the AI engine... Compiling the classification request!
 📂 Final prompt saved to resources/request.txt
 🚀 Sending the prompt to the AI model... Stand by for classification!
@@ -13,11 +13,11 @@ paramita.santra@Paramitas-MacBook-Pro hackhive-2025 % python3 script-v1.py
             "deal_name": "Project Delta",
             "amount": "$2,000",
             "transaction_date": "March 24, 2025",
-            "account_number": "ACC98765",
+            "account_number": "NA",
             "currency": "NA"
         },
-        "associated_text": "We have successfully received your loan payment for Loan Account #ACC98765 on March 24, 2025. Details of the transaction: - Amount Received: $2,000 - Payment Method: Wire Transfer",
-        "explanation": "The email confirms the receipt of a loan payment for the principal amount, which aligns with the 'Money Movement - Inbound' category as it involves money coming into the bank from an external source. The confidence score is high (0.95) because the email clearly describes an inbound transaction and matches the description and sample emails provided for this category."
+        "associated_text": "We have successfully received your loan payment for Loan Account #123456 on March 20, 2025. Details of the transaction: - Amount Received: $5,000.00 - Payment Method: Wire Transfer - Reference Number: TXN56789",
+        "explanation": "The email confirms the receipt of a loan payment, which aligns with the 'Money Movement - Inbound' category as it involves money coming into the bank from an external source. The confidence score is high (0.95) because the email clearly describes an inbound transaction and matches the description and sample emails provided for this category."
     },
     {
         "classification": {
@@ -28,11 +28,11 @@ paramita.santra@Paramitas-MacBook-Pro hackhive-2025 % python3 script-v1.py
             "deal_name": "Project Delta",
             "amount": "$500",
             "transaction_date": "March 25, 2025",
-            "account_number": "ACC98765",
+            "account_number": "NA",
             "currency": "NA"
         },
-        "associated_text": "Additionally, we have successfully received your loan payment for Loan Account #ACC98765 on March 25, 2025. Details of the transaction: - Amount Received: $500 - Payment Method: Wire Transfer",
-        "explanation": "The email confirms the receipt of a loan payment for interest accrued, which aligns with the 'Money Movement - Inbound' category as it involves money coming into the bank from an external source. The confidence score is high (0.95) because the email clearly describes an inbound transaction and matches the description and sample emails provided for this category."
+        "associated_text": "Additionally, we have successfully received your loan payment for Loan Account #123456 on March 20, 2025. Details of the transaction: - Amount Received: $5,000.00 - Payment Method: Wire Transfer - Reference Number: TXN56789",
+        "explanation": "The email confirms the receipt of a loan payment for interest, which aligns with the 'Money Movement - Inbound' category as it involves money coming into the bank from an external source. The confidence score is high (0.95) because the email clearly describes an inbound transaction and matches the description and sample emails provided for this category."
     },
     {
         "classification": {
@@ -46,23 +46,67 @@ paramita.santra@Paramitas-MacBook-Pro hackhive-2025 % python3 script-v1.py
             "account_number": "NA",
             "currency": "NA"
         },
-        "associated_text": "Additionally, we have adjusted the fee structure for your account. The new fee is $100 effective immediately.",
-        "explanation": "The email mentions an adjustment to the fee structure, which aligns with the 'Adjustment' category. The confidence score is high (0.85) because the email clearly describes a fee adjustment."
+        "associated_text": "Additionally, we have adjusted the fee structure for your account. The new fee is $200 effective immediately.",
+        "explanation": "The email mentions an adjustment to the fee structure, which aligns with the 'Adjustment' category as it involves modifying fees or terms. The confidence score is high (0.85) because the email clearly describes a fee adjustment."
     }
 ]
-📌 Money Movement - Inbound: We have successfully received your loan payment for Loan Account #ACC98765 on March 24, 2025. Details of the transaction: - Amount Received: $2,000 - Payment Method: Wire Transfer
+📌 Money Movement - Inbound: We have successfully received your loan payment for Loan Account #123456 on March 20, 2025. Details of the transaction: - Amount Received: $5,000.00 - Payment Method: Wire Transfer - Reference Number: TXN56789
 📊 Sub-classification processed! Here’s the breakdown:
 Here the sub category response with confidence score:
 {
     "category": "Principal",
-    "confidence_score": 0.75
+    "confidence_score": 0.6
 }
-📌 Money Movement - Inbound: Additionally, we have successfully received your loan payment for Loan Account #ACC98765 on March 25, 2025. Details of the transaction: - Amount Received: $500 - Payment Method: Wire Transfer
+📌 Money Movement - Inbound: Additionally, we have successfully received your loan payment for Loan Account #123456 on March 20, 2025. Details of the transaction: - Amount Received: $5,000.00 - Payment Method: Wire Transfer - Reference Number: TXN56789
 📊 Sub-classification processed! Here’s the breakdown:
 Here the sub category response with confidence score:
 {
     "category": "Principal",
     "confidence_score": 0.95
 }
-📌 Adjustment: Additionally, we have adjusted the fee structure for your account. The new fee is $100 effective immediately.
-paramita.santra@Paramitas-MacBook-Pro hackhive-2025 % 
+📌 Adjustment: Additionally, we have adjusted the fee structure for your account. The new fee is $200 effective immediately.
+Here's the final output. Enjoy!
+[
+    {
+        "category": "Money Movement - Inbound",
+        "confidence_score": 0.95,
+        "sub_category": {
+            "name": "Principal",
+            "confidence_score": 0.6
+        },
+        "extracted_fields": {
+            "deal_name": "Project Delta",
+            "amount": "$2,000",
+            "transaction_date": "March 24, 2025",
+            "account_number": "NA",
+            "currency": "NA"
+        }
+    },
+    {
+        "category": "Money Movement - Inbound",
+        "confidence_score": 0.95,
+        "sub_category": {
+            "name": "Principal",
+            "confidence_score": 0.95
+        },
+        "extracted_fields": {
+            "deal_name": "Project Delta",
+            "amount": "$500",
+            "transaction_date": "March 25, 2025",
+            "account_number": "NA",
+            "currency": "NA"
+        }
+    },
+    {
+        "category": "Adjustment",
+        "confidence_score": 0.85,
+        "sub_category": {},
+        "extracted_fields": {
+            "deal_name": "Project Delta",
+            "amount": "$100",
+            "transaction_date": "March 26, 2025",
+            "account_number": "NA",
+            "currency": "NA"
+        }
+    }
+]
