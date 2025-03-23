@@ -1,0 +1,22 @@
+Categories:
+1. Category Name: Adjustment
+    * Description: This is when we change something about a money deal that's already set up. It could be tweaking how much someone owes, updating fees, or fixing details in an agreement. It's like making small updates to keep things right.
+    * Sample Email: Please adjust the fee structure for Deal XYZ to $5000 effective 03/15/2025.
+2. Category Name: AU Transfer
+    * Description: This is about moving money between different parts of a financial setup, called Allocation Units (AU). It's like shifting a chunk of cash from one bucket to another in the same system, usually the main amount someone borrowed.
+    * Sample Email: Transfer $10,000 from Deal ABC to Deal DEF on 03/20/2025.
+3. Category Name: Closing Notice
+    * Description: This is when we tell people a money deal is ending or changing in a big way. It's like sending a heads-up that we're wrapping things up or tweaking something major, so everyone knows what's happening.
+    * Sample Email: Issue a closing notice for Deal PQR with a $1000 adjustment on 03/19/2025.
+4. Category Name: Commitment Change
+    * Description: This is when we adjust how much money we've promised to give or hold for a loan or credit deal. It's like changing our pledge—maybe giving more, less, or just rolling it over without extra cash.
+    * Sample Email: Adjust commitment for Deal BCD by $3,000 on 03/14/2025.
+5. Category Name: Fee Payment
+    * Description: This is when we handle payments for extra charges tied to money deals or loans. It's like collecting the costs for keeping things running or making special changes.
+    * Sample Email: Submit a fee payment of $250 for Deal KLM on 03/15/2025, account 54321.
+6. Category Name: Money Movement - Inbound
+    * Description: This is when money comes into the bank from outside. It could be someone paying back a loan, sending interest, or covering fees—basically any cash flowing our way.
+    * Sample Email: Receive $14,000 inbound for Deal MNO on 03/25/2025, account 77889.
+7. Category Name: Money Movement - Outbound
+    * Description: This is when money leaves the bank to go somewhere else. It includes things like sending out loans, paying someone, or moving funds to another account or place. Basically, any time the bank sends cash outward.
+    * Sample Email: Transfer $16,500 for Deal YZA on 03/26/2025 in USD.
