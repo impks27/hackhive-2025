@@ -33,12 +33,15 @@ def analyze_files(file_paths):
     # except subprocess.CalledProcessError as e:
     #     return f"Error running script-v1.py: {e.stderr}"
     # except Exception as e:
-    #     return f"Unexpected error: {str(e)}"    
-    engine = AnalysisLauncher(file_paths)
-    output = engine.process()
-    print(output)
+    #     return f"Unexpected error: {str(e)}"
+    output_dict = {}
+    for filename in os.listdir("temp"):    
+        engine = AnalysisLauncher(file_paths)
+        output = engine.process(filename)
+        output_dict.update({filename: output})
+        print(output_dict)
     
-    return output
+    return output_dict
 
 # Streamlit app
 def main():
@@ -85,7 +88,6 @@ def main():
     if file_paths and st.button("Analyze"):
         with st.spinner("Running analysis..."):
             result = analyze_files("temp")
-            st.write("FileName")
             st.write(result)
     
     if not file_paths:

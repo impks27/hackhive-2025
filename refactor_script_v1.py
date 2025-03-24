@@ -58,6 +58,27 @@ class AnalysisLauncher:
                 print(f"Error extracting text from {eml_path}: {e}")
                 return "", ""
 
+    def extract_text_from_file(self, filename):
+        extracted_text = []
+        if filename.lower().endswith(".pdf"):  # Process only PDF files
+                pdf_path = os.path.join("temp", filename)
+                try:
+                    with fitz.open(pdf_path) as doc:
+                        text = " ".join([page.get_text("text").replace("\n", " ") for page in doc]).strip()
+                        extracted_text.append(f"[{filename}]: {text}")
+                except Exception as e:
+                    print(f"Error reading {filename}: {e}")
+        if (filename.lower().endswith(".doc") or filename.lower().endswith(".doc")):  # Process only doc files
+                print("Get docs")
+        if filename.lower().endswith(".eml"):  # Process only eml files
+                email_text, attachment_text = self.extract_text_from_eml(filename)
+                print(f"email_text:",email_text)
+                print(f"attachment_text:",attachment_text)
+                extracted_text.append(f"[{filename}]: {email_text}")
+                extracted_text.append(f"\n--- Attachment Content --- {attachment_text}\n")
+                
+        return "\n".join(extracted_text) if extracted_text else ""        
+    
     # Function to extract text from all PDFs in the data folder (single line per PDF)
     def extract_text_from_data_folder(self, folder):
         extracted_text = []
@@ -225,7 +246,8 @@ class AnalysisLauncher:
 #                     "extracted_fields": extracted_fields
 #                 })
     
-    def process(self):
+    def process(self, filename):
+        print(f"Processing file {filename}...")
 #         if not os.path.exists(self.data_folder):
 #             print(f"Warning: Folder '{self.data_folder}' not found.")
 #             return json.dumps([])
@@ -249,7 +271,7 @@ class AnalysisLauncher:
         final_output = []
         #all_files_output = [filemale, final_output]
         # Extract email content from PDFs
-        email_to_classify = self.extract_text_from_data_folder(data_folder)
+        email_to_classify = self.extract_text_from_file(filename)
 
         # Combine all sections into the final prompt
         prompt = f"{objective}\n\n{categories}\n\nEmail to Classify:\n{email_to_classify}\n\n{instructions}"
