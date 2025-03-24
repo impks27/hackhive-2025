@@ -9,8 +9,10 @@ from typing import Dict, List, Optional, Tuple
 from datetime import datetime
 
 class AnalysisLauncher:
+    def __init__(self, folder_name: str):
+        self.folder_name = folder_name    
     # Function to read content from a text file
-    def extract_json_block(text):
+    def extract_json_block(self, text):
         match = re.search(r'```json\n(.*?)\n```', text, re.DOTALL)
         return match.group(1) if match else None
 
@@ -23,7 +25,7 @@ class AnalysisLauncher:
             print(f"Error extracting text from {pdf_path}: {e}")
             return ""
 
-    def read_file(filename):
+    def read_file(self,filename):
         try:
             with open(filename, "r", encoding="utf-8") as f:
                 return f.read().strip()
@@ -57,7 +59,7 @@ class AnalysisLauncher:
                 return "", ""
 
     # Function to extract text from all PDFs in the data folder (single line per PDF)
-    def extract_text_from_data_folder(folder):
+    def extract_text_from_data_folder(self, folder):
         extracted_text = []
         if not os.path.exists(folder):
             print(f"Warning: Folder '{folder}' not found.")
@@ -237,7 +239,7 @@ class AnalysisLauncher:
         objective_file = "resources/objective.txt"
         categories_file = "resources/categories.txt"
         instructions_file = "resources/instructions.txt"
-        data_folder = "data"  # Folder containing PDFs
+        data_folder = "temp"  # Folder containing PDFs
         request_file = "resources/request.txt"  # Output file for the final prompt
         # Read static sections
         objective = self.read_file(objective_file)
@@ -300,7 +302,7 @@ class AnalysisLauncher:
 
                 print("📊 Sub-classification processed! Here’s the breakdown:")
                 response_sub_content_text = response_sub['message']['content']
-                response_sub_content = extract_json_block(response_sub_content_text)
+                response_sub_content = self.extract_json_block(response_sub_content_text)
 
                 # ✅ Ensure sub-response is valid JSON
                 try:
@@ -334,6 +336,6 @@ class AnalysisLauncher:
         return final_output 
 
 if __name__ == "__main__":
-    engine = AnalysisLauncher("temp", "deepseek-r1:14b")
+    engine = AnalysisLauncher("temp")
     output = engine.process()
     print(output)

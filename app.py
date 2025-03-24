@@ -2,39 +2,43 @@ import streamlit as st
 import os
 import time
 import subprocess
+from refactor_script_v1 import AnalysisLauncher 
 
 # Placeholder for your analysis script
 def analyze_files(file_paths):
-    """
-    Replace this with your actual Python script logic to analyze the files.
-    For now, it simulates analysis and returns a dummy result.
-    """
-    st.write("Analyzing files using Deepseek...")
-    time.sleep(2)  # Simulate processing time
-    result = f"Analysis complete! Processed files: {', '.join(file_paths)}"
-    st.write("Analyzing files using Deepseek...")
+    # """
+    # Replace this with your actual Python script logic to analyze the files.
+    # For now, it simulates analysis and returns a dummy result.
+    # """
+    # st.write("Analyzing files using Deepseek...")
+    # time.sleep(2)  # Simulate processing time
+    # result = f"Analysis complete! Processed files: {', '.join(file_paths)}"
+    # st.write("Analyzing files using Deepseek...")
     
-    # Construct the command to run script-v1.py with file paths as arguments
-    command = ["python3", "script-v1.py"] #+ file_paths
+    # # Construct the command to run script-v1.py with file paths as arguments
+    # command = ["python3", "script-v1.py"] #+ file_paths
     
-    try:
-        # Run the script and capture output
-        result = subprocess.run(
-            command,
-            capture_output=True,
-            text=True,
-            check=True
-        )
-        output = result.stdout
-        if result.stderr:
-            st.error(f"Script errors: {result.stderr}")    
-        return f"Analysis complete! Output from script-v1.py:\n{output}"
-    except subprocess.CalledProcessError as e:
-        return f"Error running script-v1.py: {e.stderr}"
-    except Exception as e:
-        return f"Unexpected error: {str(e)}"    
+    # try:
+    #     # Run the script and capture output
+    #     result = subprocess.run(
+    #         command,
+    #         capture_output=True,
+    #         text=True,
+    #         check=True
+    #     )
+    #     output = result.stdout
+    #     if result.stderr:
+    #         st.error(f"Script errors: {result.stderr}")    
+    #     return f"Analysis complete! Output from script-v1.py:\n{output}"
+    # except subprocess.CalledProcessError as e:
+    #     return f"Error running script-v1.py: {e.stderr}"
+    # except Exception as e:
+    #     return f"Unexpected error: {str(e)}"    
+    engine = AnalysisLauncher("temp")
+    output = engine.process()
+    print(output)
     
-    return result
+    return output
 
 # Streamlit app
 def main():
