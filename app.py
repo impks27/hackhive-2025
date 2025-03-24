@@ -34,7 +34,7 @@ def analyze_files(file_paths):
     #     return f"Error running script-v1.py: {e.stderr}"
     # except Exception as e:
     #     return f"Unexpected error: {str(e)}"    
-    engine = AnalysisLauncher("temp")
+    engine = AnalysisLauncher(file_paths)
     output = engine.process()
     print(output)
     
@@ -84,7 +84,8 @@ def main():
     # Analyze button
     if file_paths and st.button("Analyze"):
         with st.spinner("Running analysis..."):
-            result = analyze_files(file_paths)
+            result = analyze_files("temp")
+            st.write("FileName")
             st.write(result)
     
     if not file_paths:

@@ -10,7 +10,7 @@ from datetime import datetime
 
 class AnalysisLauncher:
     def __init__(self, folder_name: str):
-        self.folder_name = folder_name    
+        self.folder_name = folder_name 
     # Function to read content from a text file
     def extract_json_block(self, text):
         match = re.search(r'```json\n(.*?)\n```', text, re.DOTALL)
@@ -239,13 +239,15 @@ class AnalysisLauncher:
         objective_file = "resources/objective.txt"
         categories_file = "resources/categories.txt"
         instructions_file = "resources/instructions.txt"
-        data_folder = "temp"  # Folder containing PDFs
+        data_folder = self.folder_name  # Folder containing PDFs
         request_file = "resources/request.txt"  # Output file for the final prompt
         # Read static sections
         objective = self.read_file(objective_file)
         categories = self.read_file(categories_file)
         instructions = self.read_file(instructions_file)
+        #all_files_output = []
         final_output = []
+        #all_files_output = [filemale, final_output]
         # Extract email content from PDFs
         email_to_classify = self.extract_text_from_data_folder(data_folder)
 
