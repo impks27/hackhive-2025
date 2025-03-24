@@ -2,7 +2,9 @@ import streamlit as st
 import os
 import time
 import subprocess
-from refactor_script_v1 import AnalysisLauncher 
+from refactor_script_v1 import AnalysisLauncher
+import pandas as pd 
+import numpy as np
 
 # Placeholder for your analysis script
 def analyze_files(file_paths):
@@ -89,9 +91,30 @@ def main():
         with st.spinner("Running analysis..."):
             result = analyze_files("temp")
             st.write(result)
+            df = flatten_output(result)
+            st.dataframe(df)
     
     if not file_paths:
         st.info("Please upload files or specify a valid folder path to enable the 'Analyze' button.")
+
+def flatten_output(output_dict):
+    data = []
+    for file_name, entries in output_dict.items():
+        for entry in entries:
+            row = {
+                "File Name": file_name,
+                "Category": entry["category"],
+                "Category Confidence": entry["confidence_score"],
+                "Sub-Category": entry["sub_category"].get("name", "N/A"),
+                "Sub-Category Confidence": entry["sub_category"].get("confidence_score", np.nan),
+                "Deal Name": entry["extracted_fields"].get("deal_name", "N/A"),
+                "Amount": entry["extracted_fields"].get("amount", np.nan),
+                "Transaction Date": entry["extracted_fields"].get("transaction_date", "N/A"),
+                "Account Number": entry["extracted_fields"].get("account_number", "N/A"),
+                "Currency": entry["extracted_fields"].get("currency", "N/A"),
+            }
+            data.append(row)
+    return pd.DataFrame(data)
 
 if __name__ == "__main__":
     # Ensure temp directory exists for uploaded files
