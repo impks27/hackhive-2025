@@ -1,0 +1,1 @@
+Objective: Classify the provided email into the most appropriate categories based on the descriptions and sample emails provided for each category. Include a confidence score for each classification.
