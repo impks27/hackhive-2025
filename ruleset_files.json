@@ -1,9 +1,0 @@
-{
-    "Adjustment": "",
-    "AU Transfer": "",
-    "Closing Notice": "resources/sub-category-closing-notice.txt",
-    "Commitment Change": "resources/sub-category-commitment-change.txt",
-    "Fee Payment": "resources/sub-category-fee-payment.txt",
-    "Money Movement - Inbound": "resources/sub-category-money-movement-inbound.txt",
-    "Money Movement - Outbound": "resources/sub-category-money-movement-outbound.txt"
-}
