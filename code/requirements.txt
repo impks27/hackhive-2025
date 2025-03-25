@@ -1,0 +1,7 @@
+streamlit
+pandas
+numpy
+ollama
+PyMuPDF  # fitz (for PDF processing)
+mailparser
+pdfplumber

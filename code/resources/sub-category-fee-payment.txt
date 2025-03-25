@@ -1,0 +1,10 @@
+Categories
+1. Category Name: Ongoing Fee
+	* Description: Recurring payments for continuous services, maintenance, or administrative costs (e.g., loan servicing fees, account upkeep, or subscription charges). These are predictable, periodic expenses tied to an active agreement.
+	* Sample Email: Process the $500 ongoing fee for Deal ABC (Account: 12345) on 03/26/2025 for quarterly administrative costs.
+	* Sample Email: Debit $750 ongoing fee for Deal DEF (Account: 67890) on 03/30/2025 for monthly system maintenance.
+2. Category Name: Letter of Credit Fee
+	* Description: Payments to issue, renew, or maintain a letter of credit (a financial guarantee for payment between parties). These fees cover risk mitigation, often charged annually or per transaction.
+	* Sample Email: Pay $1,200 LC fee for Deal GHI (Account: 34567) by 03/27/2025 for annual issuance renewal.
+	* Sample Email: Record $900 letter of credit fee for Deal JKL (Account: 89012) on 03/31/2025 for risk coverage.
+

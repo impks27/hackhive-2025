@@ -1,0 +1,13 @@
+Categories:
+1. Category Name: Decrease
+	* Description: Reduction in the approved loan amount or credit limit, typically due to repayments, reduced needs, or credit risk mitigation.
+	* Sample Email: Adjust Deal MNO with a $25,000 decrease in commitment on 03/26/2025, account 43210, due to early repayment.
+	* Sample Email: Record $15,000 commitment decrease for Deal RST on 03/29/2025, account 87654, reflecting reduced need.
+2. Category Name: Increase
+	* Description: Expansion of the approved loan amount or credit limit based on improved creditworthiness or increased funding needs.
+	* Sample Email: Approve $30,000 commitment increase for Deal UVW on 03/27/2025, account 21098, based on updated financials.
+	* Sample Email: Process $40,000 increase in commitment for Deal XYZ on 03/31/2025, account 54321, for expanded capacity.
+3. Category Name: Cashless Roll
+	* Description: This is when we shuffle existing debt or equity into a new deal without cash changing hands—like rolling over a loan into a fresh commitment, keeping the funds in play.
+	* Sample Email: Execute $50,000 cashless roll for Deal PQR into new terms on 03/28/2025, account 98765, no cash disbursed.
+	* Sample Email: Process $35,000 cashless roll for Deal JKL to extend commitment on 03/30/2025, account 65432, restructuring existing balance.
