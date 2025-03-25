@@ -39,18 +39,21 @@ class AnalysisLauncher:
                 email_body = f"{mail.body}"
                 attachment_text = ""
                 for attachment in mail.attachments:
-                    content_type = attachment.get("content_type", "").lower()
+                    content_type = attachment.get("mail_content_type", "application/pdf").lower()
                     payload = attachment.get("payload", "")
+                    attachment_filename = attachment.get("filename", "temp.pdf")  # Get actual filename
+                    print(f"attachment_filename:", attachment_filename)
+                    print(f"attachment: {attachment}")
                     if "text/plain" in content_type:
                         attachment_text += f" Attachment Text: {payload}"
                     elif "application/pdf" in content_type:
                         import base64
                         try:
                             pdf_data = base64.b64decode(payload)
-                            with open("temp.pdf", "wb") as f:
+                            with open(attachment_filename, "wb") as f:
                                 f.write(pdf_data)
-                            attachment_text += f" Attachment PDF: {self.extract_text_from_pdf('temp.pdf')}"
-                            os.remove("temp.pdf")
+                            attachment_text += f" Attachment PDF: {self.extract_text_from_pdf(attachment_filename)}"
+                            os.remove(attachment_filename)
                         except Exception as e:
                             print(f"Error processing PDF attachment in {eml_path}: {e}")
                 return email_body, attachment_text
@@ -76,9 +79,11 @@ class AnalysisLauncher:
                 email_text, attachment_text = self.extract_text_from_eml(eml_path)
                 print(f"email_text:",email_text)
                 print(f"attachment_text:",attachment_text)
-                text = (email_text.replace("\n", " ")).replace("**","").strip()
+                text = (email_text.replace("\n", " ")).replace("*","").strip()
                 extracted_text.append(f"[{filename}]: {text}")
-                #extracted_text.append(f"\n--- Attachment Content --- {attachment_text}\n")
+                if attachment_text:
+                    attachment_text = (attachment_text.replace("\n", " ")).replace("*","").strip()
+                    extracted_text.append(f"--- Attachment Content --- {attachment_text}")
                 
         return "\n".join(extracted_text) if extracted_text else ""        
     
