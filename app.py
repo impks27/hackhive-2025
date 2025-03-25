@@ -60,8 +60,8 @@ def main():
         uploaded_files = st.file_uploader(
             "Upload files to analyze",
             accept_multiple_files=True,
-            type=["txt", "pdf"],  # Add more file types as needed
-            help="Upload up to 200MB of files (e.g., .txt, .pdf)"
+            type=["txt", "pdf", "eml"],  # Add more file types as needed
+            help="Upload up to 200MB of files (e.g., .txt, .pdf, .eml)"
         )
         
         if uploaded_files:

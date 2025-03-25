@@ -36,7 +36,7 @@ class AnalysisLauncher:
     def extract_text_from_eml(self, eml_path: str) -> Tuple[str, str]:
             try:
                 mail = mailparser.parse_from_file(eml_path)
-                email_body = f"Subject: {mail.subject} Body: {mail.body}"
+                email_body = f"{mail.body}"
                 attachment_text = ""
                 for attachment in mail.attachments:
                     content_type = attachment.get("content_type", "").lower()
@@ -68,41 +68,46 @@ class AnalysisLauncher:
                         extracted_text.append(f"[{filename}]: {text}")
                 except Exception as e:
                     print(f"Error reading {filename}: {e}")
-        if (filename.lower().endswith(".doc") or filename.lower().endswith(".doc")):  # Process only doc files
+        if (filename.lower().endswith(".doc") or filename.lower().endswith(".docx")):  # Process only doc files
                 print("Get docs")
         if filename.lower().endswith(".eml"):  # Process only eml files
-                email_text, attachment_text = self.extract_text_from_eml(filename)
+                eml_path = os.path.join("temp", filename)
+                print(f"eml_path:",eml_path)
+                email_text, attachment_text = self.extract_text_from_eml(eml_path)
                 print(f"email_text:",email_text)
                 print(f"attachment_text:",attachment_text)
-                extracted_text.append(f"[{filename}]: {email_text}")
-                extracted_text.append(f"\n--- Attachment Content --- {attachment_text}\n")
+                text = (email_text.replace("\n", " ")).replace("**","").strip()
+                extracted_text.append(f"[{filename}]: {text}")
+                #extracted_text.append(f"\n--- Attachment Content --- {attachment_text}\n")
                 
         return "\n".join(extracted_text) if extracted_text else ""        
     
     # Function to extract text from all PDFs in the data folder (single line per PDF)
-    def extract_text_from_data_folder(self, folder):
-        extracted_text = []
-        if not os.path.exists(folder):
-            print(f"Warning: Folder '{folder}' not found.")
-            return ""
+    # def extract_text_from_data_folder(self, folder):
+    #     extracted_text = []
+    #     if not os.path.exists(folder):
+    #         print(f"Warning: Folder '{folder}' not found.")
+    #         return ""
 
-        for filename in os.listdir(folder):
-            if filename.lower().endswith(".pdf"):  # Process only PDF files
-                pdf_path = os.path.join(folder, filename)
-                try:
-                    with fitz.open(pdf_path) as doc:
-                        text = " ".join([page.get_text("text").replace("\n", " ") for page in doc]).strip()
-                        extracted_text.append(f"[{filename}]: {text}")
-                except Exception as e:
-                    print(f"Error reading {filename}: {e}")
-            if (filename.lower().endswith(".doc") or filename.lower().endswith(".doc")):  # Process only doc files
-                print("Get docs")
-            if filename.lower().endswith(".eml"):  # Process only eml files
-                email_text, attachment_text = extract_text_from_eml(filename)
-                print(f"email_text:",email_text)
-                print(f"attachment_text:",attachment_text)
-                extracted_text.append(f"[{filename}]: {email_text}")
-                extracted_text.append(f"\n--- Attachment Content --- {attachment_text}\n")
+    #     for filename in os.listdir(folder):
+    #         if filename.lower().endswith(".pdf"):  # Process only PDF files
+    #             pdf_path = os.path.join(folder, filename)
+    #             try:
+    #                 with fitz.open(pdf_path) as doc:
+    #                     text = " ".join([page.get_text("text").replace("\n", " ") for page in doc]).strip()
+    #                     extracted_text.append(f"[{filename}]: {text}")
+    #             except Exception as e:
+    #                 print(f"Error reading {filename}: {e}")
+    #         if (filename.lower().endswith(".doc") or filename.lower().endswith(".doc")):  # Process only doc files
+    #             print("Get docs")
+    #         if filename.lower().endswith(".eml"):  # Process only eml files
+    #             eml_path = os.path.join(folder, filename)
+    #             print(f"eml_path:",eml_path)
+    #             email_text, attachment_text = self.extract_text_from_eml(eml_path)
+    #             print(f"email_text:",email_text)
+    #             print(f"attachment_text:",attachment_text)
+    #             extracted_text.append(f"[{filename}]: {email_text}")
+    #             extracted_text.append(f"\n--- Attachment Content --- {attachment_text}\n")
                 
                 
         return "\n".join(extracted_text) if extracted_text else ""
