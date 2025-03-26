@@ -5,3 +5,6 @@ ollama
 PyMuPDF  # fitz (for PDF processing)
 mailparser
 pdfplumber
+pytest 
+pytest-html 
+pytest-cov
