@@ -1,0 +1,49 @@
+Instructions:
+1. Forget any previous processign histry or cache. Start fresh. Analyze the email content and assign it to the most appropriate categories based on the provided descriptions and sample emails.
+2. If the email contains text that belongs to multiple categories, create a JSON array where each object represents a distinct category, its associated fields, and the text from the email that supports the classification. Do not combine data for similar categories. Keep them separate.
+3. Provide a confidence score for each classification between 0 and 1, where:
+    * 0.9-1.0: Very confident
+    * 0.7-0.89: Confident
+    * 0.5-0.69: Somewhat confident
+    * Below 0.5: Not confident
+4. Extract below fields for each category if found in inputs else mark as NA:
+    * deal_name
+    * amount
+    * transaction_date
+    * account_number
+    * currency
+5. Include the specific portion of the email text directly relevant to each classified transaction under the key "associated_text". This should be the exact text segment that supports the classification, excluding unrelated parts of the email, to provide precise context for each category.
+6. Provide a brief explanation for each classification.
+7. Provide the output in the following JSON format. Do not include additional text. Below mentioned is a sample. Do not consider this example as an input for classification. 
+[
+    {
+        "classification": {
+            "category": "Category Name",
+            "confidence_score": 0.95
+        },
+        "extracted_fields": {
+            "deal_name": "NA",
+            "amount": "$5,000.00",
+            "transaction_date": "March 20, 2025",
+            "account_number": "123456",
+            "currency": "NA"
+        },
+        "associated_text": "We have successfully received your loan payment for Loan Account #123456 on March 20, 2025. Details of the transaction: - Amount Received: $5,000.00 - Payment Method: Wire Transfer - Reference Number: TXN56789",
+        "explanation": "The email confirms the receipt of a loan payment, which aligns with the 'Money Movement - Inbound' category as it involves money coming into the bank from an external source. The confidence score is high (0.95) because the email clearly describes an inbound transaction and matches the description and sample emails provided for this category."
+    },
+    {
+        "classification": {
+            "category": "Adjustment",
+            "confidence_score": 0.85
+        },
+        "extracted_fields": {
+            "deal_name": "NA",
+            "amount": "$200",
+            "transaction_date": "NA",
+            "account_number": "123456",
+            "currency": "NA"
+        },
+        "associated_text": "Additionally, we have adjusted the fee structure for your account. The new fee is $200 effective immediately.",
+        "explanation": "The email mentions an adjustment to the fee structure, which aligns with the 'Adjustment' category. The confidence score is high (0.85) because the email clearly describes a fee adjustment."
+    }
+]

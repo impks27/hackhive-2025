@@ -1,0 +1,9 @@
+Categories:
+1. Category Name: Timebound 
+	* Description: Payments that must be processed by a specific deadline due to contractual obligations, scheduled payouts, or maturity dates. These are time-sensitive transactions where delays could result in penalties or missed obligations.
+	* Sample Email: Please process a timebound payment of $10,000 for Deal XYZ by 03/26/2025 (Account: 54321) to meet the contract deadline.
+	* Sample Email: Initiate an $8,500 timebound disbursement for Deal LMN on 03/28/2025 (Account: 77889) as per the loan maturity schedule.
+2. Category Name: Foreign Currency
+	* Description: Payments made in a currency other than the sender’s default currency (e.g., EUR, JPY, GBP). These involve exchange rates, international fees, and often require confirmation of forex details.
+	* Sample Email:Transfer €12,000 (foreign currency) for Deal PQR on 03/27/2025 (Account: 99001). Ensure the exchange rate is locked in before processing.
+	* Sample Email: Send ¥1,500,000 (foreign currency) for Deal JKL by 03/31/2025 (Account: 66554). Include forex fees in the transaction memo.

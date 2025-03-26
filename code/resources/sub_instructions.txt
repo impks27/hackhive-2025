@@ -1,0 +1,14 @@
+Instructions:
+1. Analyze the email content and assign it to the most appropriate categories based on the provided descriptions and sample emails.
+2. Provide a confidence score for each classification between 0 and 1, where:
+    * 0.9-1.0: Very confident
+    * 0.7-0.89: Confident
+    * 0.5-0.69: Somewhat confident
+    * Below 0.5: Not confident
+3. The email can only be classified as one category. Include the one in resonse with highest confidence.
+4. Provide the output strictly in the following JSON format. Below mentioned is a sample. Do not consider this example as an input for classification. 
+{
+    "category": "Adjustment",
+    "confidence_score": 0.85
+}
+5. Do not include additional text. The reponse should only be a json.
