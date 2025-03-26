@@ -44,7 +44,7 @@ class LendingServiceApp:
         return pd.DataFrame(data)
 
     def run(self):
-        st.title("Commercial Bank Lending Service")
+        st.title("DeepFin - Commercial Lending Service")
         st.write("Choose how to provide files for analysis:")
         
         option = st.radio("Select an option:", ("Upload Files", "Specify Folder Path"))
@@ -72,9 +72,10 @@ class LendingServiceApp:
             if self.file_paths and st.button("Analyze"):
                 with st.spinner("Running analysis..."):
                     result = self.analyze_files()
-                    st.write(result)
+                    #st.write(result)
                     df = self.flatten_output(result)
                     st.dataframe(df)
+                    st.write(result)
                 self.clean_inventory()
             
             if not self.file_paths:
