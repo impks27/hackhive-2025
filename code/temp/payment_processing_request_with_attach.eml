@@ -1,0 +1,67 @@
+Subject:
+ Payment Processing Requests for Timebound and Foreign Currency Transactions
+From: alex.carter@example.com
+To: payments-team@example.com
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============6381990879593748661=="
+
+--===============6381990879593748661==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Date: March 25, 2025
+
+To: Payments Processing Team
+
+Subject: Payment Processing Requests for Timebound and Foreign Currency Trans=
+actions
+
+Dear Team,
+
+Please process the following payments categorized under Timebound transaction=
+s:
+
+1. **Timebound Payments:**
+   - Please process a timebound payment of $10,000 for Deal XYZ by 03/26/2025=
+ (Account: 54321) to meet the contract deadline.
+   - Initiate an $8,500 timebound disbursement for Deal LMN on 03/28/2025 (Ac=
+count: 77889) as per the loan maturity schedule.
+
+The details for Foreign Currency Payments are attached in a PDF.
+
+Please confirm once these transactions have been processed. Let me know if an=
+y further details are required.
+
+Best regards, =20
+Alex Carter =20
+Finance Department
+
+--===============6381990879593748661==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="foreign_currency_payments.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjMKMyAwIG9iago8PC9UeXBlIC9QYWdlCi9QYXJlbnQgMSAwIFIKL1Jlc291cmNlcyAy
+IDAgUgovQ29udGVudHMgNCAwIFI+PgplbmRvYmoKNCAwIG9iago8PC9GaWx0ZXIgL0ZsYXRlRGVj
+b2RlIC9MZW5ndGggMjk2Pj4Kc3RyZWFtCnicjZDLbsIwFET3fMUsQaLGTuKEsKn6AKm0C9p6ySY4
+N5AWnMpOBHxQ/7Mx0AdqF92O7sydMwGmHc5kgm3nWmEwERAB4xyqwFh5KRRMpEhSyZIEKkd3Ulkq
+lwY3jbVk9B6zbL8hU7tRD+rFuwRLoghq+8Mepowf7RdQNjOuIItLEfR5+2veLU6Z+pQ576GVcEvZ
+GrPHJ1QGPBwEySDggWzvr7SuGlOPkKaci3mPYWxcYwn1ij5b8PMGgrMkPDSgnV5lZkmwWU0oHdaV
+fqUcpcGCfBO82UqTc6VZsm+mcBieJcbDoNVOTM9kcryLvuT8H0jT+wcs9h4pFL+Q4ljKyCPdGb1u
+cvI22v1NFcuI8SNVQeQ8QrsAar9wpuuy3W1Dm+qL4gN+74o5CmVuZHN0cmVhbQplbmRvYmoKMSAw
+IG9iago8PC9UeXBlIC9QYWdlcwovS2lkcyBbMyAwIFIgXQovQ291bnQgMQovTWVkaWFCb3ggWzAg
+MCA1OTUuMjggODQxLjg5XQo+PgplbmRvYmoKNSAwIG9iago8PC9UeXBlIC9Gb250Ci9CYXNlRm9u
+dCAvSGVsdmV0aWNhCi9TdWJ0eXBlIC9UeXBlMQovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+
+PgplbmRvYmoKMiAwIG9iago8PAovUHJvY1NldCBbL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMg
+L0ltYWdlSV0KL0ZvbnQgPDwKL0YxIDUgMCBSCj4+Ci9YT2JqZWN0IDw8Cj4+Cj4+CmVuZG9iago2
+IDAgb2JqCjw8Ci9Qcm9kdWNlciAoUHlGUERGIDEuNy4yIGh0dHA6Ly9weWZwZGYuZ29vZ2xlY29k
+ZS5jb20vKQovQ3JlYXRpb25EYXRlIChEOjIwMjUwMzI1MTk0OTU1KQo+PgplbmRvYmoKNyAwIG9i
+ago8PAovVHlwZSAvQ2F0YWxvZwovUGFnZXMgMSAwIFIKL09wZW5BY3Rpb24gWzMgMCBSIC9GaXRI
+IG51bGxdCi9QYWdlTGF5b3V0IC9PbmVDb2x1bW4KPj4KZW5kb2JqCnhyZWYKMCA4CjAwMDAwMDAw
+MDAgNjU1MzUgZiAKMDAwMDAwMDQ1MyAwMDAwMCBuIAowMDAwMDAwNjM2IDAwMDAwIG4gCjAwMDAw
+MDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA4NyAwMDAwMCBuIAowMDAwMDAwNTQwIDAwMDAwIG4gCjAw
+MDAwMDA3NDAgMDAwMDAgbiAKMDAwMDAwMDg0OSAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDgK
+L1Jvb3QgNyAwIFIKL0luZm8gNiAwIFIKPj4Kc3RhcnR4cmVmCjk1MgolJUVPRgo=
+
+--===============6381990879593748661==--
